@@ -1,0 +1,28 @@
+.main {
+  width: 272px;
+  position: relative;
+  height: 208px;
+}
+.content {
+  flex-direction: column;
+  align-items: center;
+}
+.main .counter {
+  position: absolute;
+  right: 0%;
+}
+.counter {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #4C4CFF;
+  align-items: center;
+  justify-content: center;
+}
+span {
+  display: block;
+}
+.name {
+  text-align: center;
+  word-wrap: break-word;
+}

@@ -1,0 +1,19 @@
+.header {
+  background: #1C1C21;
+  display: flex;
+  justify-content: center;
+  height: 88px;
+  align-items: center;
+  width: 100%;
+}
+
+.main {
+  width: 1280px;
+  display: inline-flex;
+  height: 56px;
+  justify-content: space-between;
+}
+
+.item {
+  display: inline-flex;
+}

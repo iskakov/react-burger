@@ -1,0 +1,10 @@
+.main {
+  width: 100%;
+}
+span {
+  display: block;
+}
+section {
+  display: flex;
+  flex-wrap: wrap;
+} 
