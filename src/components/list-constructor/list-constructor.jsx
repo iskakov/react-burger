@@ -5,19 +5,20 @@ import styles from './list-constructor.module.css'
 class ListConstructor extends Component {
   render() {
     return (
-      <section className={styles.main + (this.props.type === 'bun' ? ' ml-8': '') + ' mb-4'}>
+      <div className={styles.main + (this.props.type === 'bun' ? ' ml-8': '') + ' mb-4'}>
         {this.props.type !== 'bun' && (
-          <DragIcon type="primary" />
+          <div className='mr-2'>
+            <DragIcon type="primary" />
+          </div>
         )}
         <ConstructorElement
-        extraClass='ml-2'
-        type={this.props.index === 0 ? 'top' : (this.props.index === this.props.length ? 'bottom' : '')}
+        type={this.props.index === 0 ? 'top' : (this.props.index === this.props.length - 1 ? 'bottom' : '')}
         isLocked={this.props.type === 'bun'}
         text={this.props.name}
         price={this.props.price}
         thumbnail={this.props.image}
         handleClose={e => this.props.delIngredient(this.props['__id'])} />
-      </section>
+      </div>
     );
   }
 }
