@@ -14,6 +14,13 @@ export default class BurgerIngredients extends Component {
       currentTab
     });
   }
+
+  scrollTo = (currentTab) => {
+    this.setState({
+      currentTab
+    });
+  }
+
   render() {
     let categories = this.props.burgerIngredients.reduce((accum, burgerIngredient) => {
       if (!accum.hasOwnProperty(burgerIngredient.type)) {
@@ -38,7 +45,7 @@ export default class BurgerIngredients extends Component {
         </section>
         <section className={styles.categories}>
           {Object.keys(categories).map(key => (
-            <ListIngredient key={key} id={key} data={categories[key]} addIngredient={this.props.addIngredient}/>
+            <ListIngredient key={key} id={key} data={categories[key]} addIngredient={this.props.addIngredient} scrollTo={this.scrollTo}/>
           ))}
         </section>
       </section>

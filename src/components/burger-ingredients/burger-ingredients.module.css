@@ -6,6 +6,7 @@ span {
   display: block;
 }
 .categories {
+  scroll-behavior: smooth;
   height: 83%;
   overflow-y: auto;
 }
