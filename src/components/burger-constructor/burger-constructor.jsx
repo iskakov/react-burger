@@ -4,24 +4,11 @@ import ListConstructor from '../list-constructor/list-constructor'
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
 import PriceIcon from '../price-icon/price-icon';
-const burgerConstructor = PropTypes.shape({
-  '_id': PropTypes.string,
-  '__v': PropTypes.number,
-  name: PropTypes.string,
-  type: PropTypes.string,
-  proteins: PropTypes.number,
-  fat: PropTypes.number,
-  carbohydrates: PropTypes.number,
-  calories: PropTypes.number,
-  price: PropTypes.number,
-  image: PropTypes.string,
-  image_mobile: PropTypes.string,
-  image_large: PropTypes.string,
-})
+import {BURGER_INGREDIENT_TYPE} from '../../utils/constants';
 export default class BurgerConstructor extends Component {
   submit = () => {}
   render() {   
-    let summ = this.props.burgerConstructor.reduce((accum, item) => accum + item.price, 0);
+    const summ = this.props.burgerConstructor.reduce((accum, item) => accum + item.price, 0);
     return (
       <form className={styles.main + ' mr-5 ml-5 mt-25'} onSubmit={this.submit}>
         <section className={styles.list}>
@@ -47,5 +34,5 @@ export default class BurgerConstructor extends Component {
   }
 }
 BurgerConstructor.propTypes = {
-  burgerConstructor: PropTypes.arrayOf(burgerConstructor).isRequired
+  burgerConstructor: PropTypes.arrayOf(BURGER_INGREDIENT_TYPE.isRequired).isRequired
 }

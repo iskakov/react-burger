@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styles from './burger-ingredient.module.css';
 import PriceIcon from '../price-icon/price-icon';
+import { BURGER_TYPE } from '../../utils/constants';
 
 class BurgerIngredient extends Component {
   render() {
@@ -20,4 +21,7 @@ class BurgerIngredient extends Component {
     );
   }
 }
+
+BurgerIngredient.propTypes = BURGER_TYPE;
+
 export default BurgerIngredient;

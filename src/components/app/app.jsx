@@ -4,7 +4,7 @@ import data from '../../utils/data'
 import styles from './app.module.css'
 import BurgerIngredients from '../burger-ingredients/burger-ingredients'
 import BurgerConstructor from '../burger-constructor/burger-constructor'
-
+import {TYPE_OF_CATEGORY} from '../../utils/constants'
 export default class App extends Component {
   state= {
     burgerIngredients: data,
@@ -15,11 +15,15 @@ export default class App extends Component {
     this.setState((prevState)=> {
       const burgerConstructor = prevState.burgerConstructor;
       const ingredient = prevState.burgerIngredients.find(item => item['_id'] === id)
-      if (ingredient.type === 'bun') {
-        const bunInConstructor =  burgerConstructor.find(item => item.type === 'bun' && item['_id'] !== ingredient['_id']);
+      if (ingredient.type === TYPE_OF_CATEGORY.bun) {
+        const bunInConstructor =  burgerConstructor.find(item => item.type === TYPE_OF_CATEGORY.bun && item['_id'] !== ingredient['_id']);
         if (!bunInConstructor) {
           ingredient['__v'] += 2;
-          burgerConstructor.push(ingredient);
+          if (burgerConstructor.length > 0) {
+            burgerConstructor.splice(burgerConstructor.indexOf(bunInConstructor), 0, ingredient);
+          } else {
+            burgerConstructor.push(ingredient);
+          }
           burgerConstructor.push(ingredient);
         } else {
           if (bunInConstructor['_id'] !== ingredient['_id']) {

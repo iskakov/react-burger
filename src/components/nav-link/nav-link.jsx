@@ -1,29 +1,17 @@
-import { BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Component } from 'react'
 import styles from './nav-link.module.css'
+import PropTypes from 'prop-types';
+import { getNavIcon } from '../../utils/constants';
+
 export default class NavLink extends Component {
 
   navigate= ()=> {
-    console.log('navigate');
+
   }
 
   render() {
-    let icon, active = this.props.icon === this.props.active;
-
-    switch (this.props.icon) {
-      case 'burger':
-        icon = (<BurgerIcon type={active ? 'primary' : 'secondary'} />)
-        break;
-
-      case 'list':
-        icon = (<ListIcon type={active ? 'primary' : 'secondary'} />)
-        break;
-    
-      default:
-        icon = (<ProfileIcon type={active ? 'primary' : 'secondary'} />)
-        break;
-    }
-    
+    const active = this.props.icon === this.props.active;
+    const icon = getNavIcon(this.props.icon, this.props.active)
     return (
       <a href='/' onClick={this.navigate} className={styles['nav-link'] + ' mr-5 ml-5 mt-4 mb-4'}>
         {icon}
@@ -32,4 +20,10 @@ export default class NavLink extends Component {
       
     )
   }
+}
+
+NavLink.propTypes = {
+  icon: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+  active: PropTypes.bool.isRequired
 }

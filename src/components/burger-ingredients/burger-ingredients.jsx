@@ -3,24 +3,10 @@ import styles from './burger-ingredients.module.css'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import ListIngredient from '../list-ingredient/list-ingredient'
 import PropTypes from 'prop-types';
-
-const burgerIngredient = PropTypes.shape({
-  '_id': PropTypes.string,
-  '__v': PropTypes.number,
-  name: PropTypes.string,
-  type: PropTypes.string,
-  proteins: PropTypes.number,
-  fat: PropTypes.number,
-  carbohydrates: PropTypes.number,
-  calories: PropTypes.number,
-  price: PropTypes.number,
-  image: PropTypes.string,
-  image_mobile: PropTypes.string,
-  image_large: PropTypes.string,
-})
+import { TYPE_OF_CATEGORY, BURGER_INGREDIENT_TYPE } from '../../utils/constants';
 export default class BurgerIngredients extends Component {
   state = {
-    currentTab: 'bun'
+    currentTab: TYPE_OF_CATEGORY.bun
   }
   onChangeTab = (currentTab) => {
     document.getElementById(currentTab).scrollIntoView();
@@ -29,24 +15,24 @@ export default class BurgerIngredients extends Component {
     });
   }
   render() {
-    let categories = {};
-    this.props.burgerIngredients.forEach(burgerIngredient => {
-      if (!categories.hasOwnProperty(burgerIngredient.type)) {
-        categories[burgerIngredient.type] = [];
+    let categories = this.props.burgerIngredients.reduce((accum, burgerIngredient) => {
+      if (!accum.hasOwnProperty(burgerIngredient.type)) {
+        accum[burgerIngredient.type] = [];
       }
-      categories[burgerIngredient.type].push(burgerIngredient);
-    });
+      accum[burgerIngredient.type].push(burgerIngredient);
+      return accum;
+    }, {});
     return (
       <section className={styles.main + ' mr-5 ml-5'}>
         <span className='mt-10 text text_type_main-medium'>Соберите бургер</span>
         <section className='mt-5'>
-          <Tab value="bun" active={this.state.currentTab === 'bun'} onClick={this.onChangeTab}>
+          <Tab value={TYPE_OF_CATEGORY.bun} active={this.state.currentTab === TYPE_OF_CATEGORY.bun} onClick={this.onChangeTab}>
             Булки
           </Tab>
-          <Tab value="sauce" active={this.state.currentTab === 'sauce'} onClick={this.onChangeTab}>
+          <Tab value={TYPE_OF_CATEGORY.sauce} active={this.state.currentTab === TYPE_OF_CATEGORY.sauce} onClick={this.onChangeTab}>
             Соусы
           </Tab>
-          <Tab value="main" active={this.state.currentTab === 'main'} onClick={this.onChangeTab}>
+          <Tab value={TYPE_OF_CATEGORY.main} active={this.state.currentTab === TYPE_OF_CATEGORY.main} onClick={this.onChangeTab}>
             Начинки
           </Tab>
         </section>
@@ -61,5 +47,5 @@ export default class BurgerIngredients extends Component {
 }
 
 BurgerIngredients.propTypes = {
-  burgerIngredients: PropTypes.arrayOf(burgerIngredient).isRequired
+  burgerIngredients: PropTypes.arrayOf(BURGER_INGREDIENT_TYPE.isRequired).isRequired
 }
