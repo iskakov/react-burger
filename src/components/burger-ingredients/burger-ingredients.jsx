@@ -4,7 +4,6 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import ListIngredient from '../list-ingredient/list-ingredient'
 import PropTypes from 'prop-types';
 import { TYPE_OF_CATEGORY, BURGER_INGREDIENT_TYPE } from '../../utils/constants';
-import Modal from '../modal/modal';
 
 const BurgerIngredients = (props) => {
   const [currentTab, setCurrentTab] = React.useState(TYPE_OF_CATEGORY.bun)
