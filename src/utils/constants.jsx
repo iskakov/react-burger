@@ -57,6 +57,7 @@ const getNavIcon = (icon, active) => {
       icon = (<ProfileIcon type={active ? 'primary' : 'secondary'} />)
       break;
   }
+  return icon;
 }
 
 export {
