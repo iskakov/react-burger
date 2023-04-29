@@ -7,6 +7,8 @@ const TYPE_OF_CATEGORY = {
   main: 'main'
 }
 
+const API_URL = 'https://norma.nomoreparties.space/api/ingredients';
+
 const BURGER_INGREDIENT_TYPE = PropTypes.shape({
   '_id': PropTypes.string.isRequired,
   '__v': PropTypes.number.isRequired,
@@ -65,5 +67,6 @@ export {
   BURGER_INGREDIENT_TYPE,
   BURGER_TYPE,
   CATEGORY_ON_RUSSIAN,
+  API_URL,
   getNavIcon
 }
