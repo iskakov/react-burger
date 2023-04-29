@@ -20,7 +20,7 @@ const ListIngredient = (props) => {
     observer.observe(document.getElementById(TYPE_OF_CATEGORY.sauce));
     observer.observe(document.getElementById(TYPE_OF_CATEGORY.main));
     return () => observer.disconnect();
-  });
+  }, []);
 
   return (
     <section id={props.id} className={styles.main}>
