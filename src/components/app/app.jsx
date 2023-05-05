@@ -4,6 +4,7 @@ import styles from './app.module.css'
 import BurgerIngredients from '../burger-ingredients/burger-ingredients'
 import BurgerConstructor from '../burger-constructor/burger-constructor'
 import {API_URL, TYPE_OF_CATEGORY} from '../../utils/constants'
+import { getIngredients } from '../../utils/api'
 
 const App = () => {
 
@@ -17,18 +18,17 @@ const App = () => {
     const getData = async () => {
       try {
         setState({...state, isLoading: true})
-        const fetchedData = await fetch(API_URL);
-        const data = await fetchedData.json();
+        const data = await getIngredients();
         setState({
           isLoading: false,
           ...data,
           burgerConstructor: []
         })
-      } catch (e) {
+      } catch (data) {
         setState({
           isLoading: false,
           success: false,
-          errorMessage: 'Не удалось загрузить данные'
+          errorMessage: data.message
         })
       }
     }
