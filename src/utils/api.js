@@ -12,7 +12,10 @@ const getIngredients = () => {
 const newOrder = (ingredients) => {
   return fetch(ORDER_URL, {
     method: 'POST',
-    body: JSON.stringify(ingredients)
+    body: JSON.stringify(ingredients),
+    headers: {
+      "Content-Type": "application/json",
+    },
   }).then((res) => {
       return res.ok ? res.json() : res.json().then((err) => Promise.reject({error: true, message: err.message}))
   }).catch((e) => {
