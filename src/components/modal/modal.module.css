@@ -1,0 +1,11 @@
+.modal {
+  min-width: 720px;
+  background: #1C1C21;
+  flex-direction: column;
+  border-radius: 40px;
+}
+
+.header {
+  align-items: center;
+  justify-content: space-between;
+}
