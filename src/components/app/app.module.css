@@ -1,0 +1,6 @@
+.main {
+  display: inline-flex;
+  justify-content: center;
+  width: 100%; 
+  height: calc(100vh - 88px);
+}
