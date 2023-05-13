@@ -1,0 +1,6 @@
+export const ADD_INGREDIENT = 'ADD_INGREDIENT'
+export const DEL_INGREDIENT = 'DEL_INGREDIENT'
+export const INC_SUMM = 'INC_SUMM'
+export const DEC_SUMM = 'DEC_SUMM'
+export const CHANGE_ORDER = 'CHANGE_ORDER'
+export const SORT = 'SORT'

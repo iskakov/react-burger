@@ -63,6 +63,18 @@ const getNavIcon = (icon, active) => {
   return icon;
 }
 
+function bubleSort(first, second) {
+  if (first.order > second.order) {
+    return 1;
+  }
+
+  if (first.order < second.order) {
+    return -1;
+  }
+
+  return 0;
+}
+
 export {
   TYPE_OF_CATEGORY,
   BURGER_INGREDIENT_TYPE,
@@ -70,5 +82,6 @@ export {
   CATEGORY_ON_RUSSIAN,
   API_URL,
   ORDER_URL,
-  getNavIcon
+  getNavIcon,
+  bubleSort
 }

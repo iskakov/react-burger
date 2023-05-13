@@ -29,8 +29,3 @@
 .list::-webkit-scrollbar-thumb {
   background-color: #8585AD;
 }
-.constructor-element {
-  width: 100%;
-  align-items: center;
-  flex-wrap: nowrap;
-}
