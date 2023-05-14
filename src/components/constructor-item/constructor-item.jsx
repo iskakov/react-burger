@@ -6,22 +6,26 @@ import { useDispatch } from 'react-redux';
 import { useDrag, useDrop } from "react-dnd";
 import { delIngredient, sortingIngredients } from '../../services/reducers/burger-constructor';
 import PropTypes from 'prop-types'
+import { CHANGE_DRAG } from '../../services/actions/burger-constructor';
 
-export default function ConstructorItem({index, ingredient, lastIndex}) {
+export default function ConstructorItem({ingredient}) {
   const dispatch = useDispatch();
 
-  const delIngredientAction = (item, index) => {
-    dispatch(delIngredient(item, false, index))
+  const delIngredientAction = (item) => {
+    dispatch(delIngredient(item))
   }
   const ref = React.useRef(null)
   const [{ isDrag }, drag] = useDrag({
     type: 'constructorIngredients',
     item: () => {
-      return { id: ingredient['_id'], order: ingredient.order }
+      return { id: ingredient.uuid, order: ingredient.order }
     },
     collect: monitor => ({
       isDrag: monitor.isDragging()
-    })
+    }),
+    end: (item) => {
+      dispatch({type: CHANGE_DRAG, uuid: item.id, isDrag: false})
+    }
   });
   const [{handlerId}, drop] = useDrop({
     accept: "constructorIngredients",
@@ -52,34 +56,34 @@ export default function ConstructorItem({index, ingredient, lastIndex}) {
       }
       chageOrder(dragIndex, hoverIndex)
       item.order = hoverIndex
-    },
+    }
   })
+  React.useEffect(() => {
+    if (!ingredient.isDrag && isDrag) {
+      dispatch({type: CHANGE_DRAG, uuid: ingredient.uuid, isDrag})
+    }
+  }, [isDrag, dispatch])
   drag(drop(ref))
   const chageOrder = React.useCallback((dragIndex,hoverIndex) => {
     dispatch(sortingIngredients(dragIndex, hoverIndex))
-  },[]) 
+  }, []) 
 
   return (
-    <section draggable ref={ingredient.type !== TYPE_OF_CATEGORY.bun ? ref : null} style={{opacity: isDrag ? 0 : 1}} data-handler-id={handlerId}
-    key={ingredient['_id'] + '_' + index} className={styles['constructor-element'] + (ingredient.type === TYPE_OF_CATEGORY.bun ? ' ml-8': '') + ' mb-4'}>
-      {ingredient.type !== TYPE_OF_CATEGORY.bun && (
-        <div className='mr-2'>
-          <DragIcon type="primary" />
-        </div>
-      )}
+    <section draggable ref={ref} style={{opacity: ingredient.isDrag ? 0 : 1}} data-handler-id={handlerId}
+    key={ingredient.uuid}
+    className={styles['constructor-element'] + (ingredient.type === TYPE_OF_CATEGORY.bun ? ' ml-8': '') + ' mb-4'}>
+      <div className='mr-2'>
+        <DragIcon type="primary" />
+      </div>
       <ConstructorElement
-      type={ingredient.type === TYPE_OF_CATEGORY.bun ? (index === 0 ? 'top' : index + 1  === lastIndex ? 'bottom' : '') : ''}
-      isLocked={ingredient.type === TYPE_OF_CATEGORY.bun}
-      text={ingredient.name + (ingredient.type === TYPE_OF_CATEGORY.bun ? (index === 0 ? ' (верх)' : index + 1 === lastIndex ? ' (низ)' : '') : '')}
+      text={ingredient.name}
       price={ingredient.price}
       thumbnail={ingredient.image}
-      handleClose={e => delIngredientAction(ingredient, index)} />
+      handleClose={e => delIngredientAction(ingredient)} />
     </section>
   )
 }
 
 ConstructorItem.propTypes = {
-  index: PropTypes.number.isRequired,
-  lastIndex: PropTypes.number.isRequired,
-  ingredient: BURGER_INGREDIENT_TYPE.isRequired,
+  ingredient: BURGER_INGREDIENT_TYPE.isRequired
 }

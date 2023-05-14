@@ -2,9 +2,10 @@ import React from 'react';
 import styles from './order-details.module.css';
 import image from '../../images/done.png';
 import { useSelector} from 'react-redux';
+import { getOrder } from '../../services/store';
 
 const OrderDetails = () => {
-  const {order} = useSelector(store => store.order)
+  const {order} = useSelector(getOrder)
 
   return (
     <section className={styles.main}>

@@ -3,21 +3,14 @@ import styles from './burger-ingredients.module.css'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import ListIngredient from '../list-ingredient/list-ingredient'
 import { TYPE_OF_CATEGORY } from '../../utils/constants';
-
 import { useDispatch, useSelector} from 'react-redux';
 import { getIngredientsAction } from '../../services/reducers/burger-ingredients';
+import { getBurgerIngredients } from '../../services/store';
 
 const BurgerIngredients = () => {
   const [currentTab, setCurrentTab] = React.useState(TYPE_OF_CATEGORY.bun)
   const dispatch = useDispatch();
-  const {ingredients, ingredientsPreload, ingredientsError, errorMessage} = useSelector(store => {
-    return {
-      ingredients: store.burgerIngredients.ingredients,
-      ingredientsPreload: store.burgerIngredients.ingredientsPreload,
-      ingredientsError: store.burgerIngredients.ingredientsError,
-      errorMessage: store.burgerIngredients.errorMessage,
-    }
-  })
+  const {ingredients, ingredientsPreload, ingredientsError, errorMessage} = useSelector(getBurgerIngredients)
   React.useEffect(() => {
     dispatch(getIngredientsAction())
   }, [dispatch]);

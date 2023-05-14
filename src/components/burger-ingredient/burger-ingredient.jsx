@@ -4,7 +4,6 @@ import { useLongPress } from 'use-long-press';
 import React from 'react';
 import Modal from '../modal/modal';
 import IngredientDetails from '../ingredient-details/ingredient-details';
-import { addIngredient } from '../../services/reducers/burger-constructor';
 import { useDispatch} from 'react-redux';
 import { SELECT_INGREDIENT, CLEAR_IGREDIENT } from '../../services/actions/burger-ingredient';
 import { useDrag } from "react-dnd";
@@ -20,12 +19,6 @@ const BurgerIngredient = ({ingredient}) => {
         isDrag: monitor.isDragging()
     })
   });
-  const bind = useLongPress(() => {
-    if (!isDrag) {
-      dispatch({type: SELECT_INGREDIENT, payload: ingredient})
-      setIsModalIngredient(true);
-    }
-  });
 
   const onClose = () => {
     dispatch({type: CLEAR_IGREDIENT})
@@ -33,17 +26,17 @@ const BurgerIngredient = ({ingredient}) => {
   }
 
   const addIngredientAction = () => {
-    dispatch(addIngredient(ingredient))
+    dispatch({type: SELECT_INGREDIENT, payload: ingredient})
+    setIsModalIngredient(true);
   }
   return (
       <div className={styles.main + ' mt-6 mb-2 mr-4 ml-2'}
       draggable
       ref={dragRef}
-      {...bind()}
       onClick={addIngredientAction}>
-        {ingredient['__v'] > 0 && (
+        {ingredient.count > 0 && (
           <section className={styles.counter}>
-            <span className='text text_type_digits-default'>{ingredient['__v']}</span>
+            <span className='text text_type_digits-default'>{ingredient.count}</span>
           </section>
         )}
         <section className={styles.content}>

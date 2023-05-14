@@ -3,9 +3,10 @@ import styles from './ingredient-details.module.css';
 import InfoIngredient from '../info-ingredient/info-ingredient';
 import { BURGER_TYPE } from '../../utils/constants';
 import { useSelector} from 'react-redux';
+import { getBurgerIngredient } from '../../services/store';
 
 const IngredientDetails = () => {
-  const {ingredient} = useSelector(store => store.burgerIngredient)
+  const {ingredient} = useSelector(getBurgerIngredient)
 
   return (
     <section className={styles.main}>

@@ -1,4 +1,6 @@
 import { newOrder } from "../../utils/api";
+import { CLEAR_INGREDIENTS } from "../actions/burger-constructor";
+import { CLEAR_COUNTERS } from "../actions/burger-ingredients";
 import {  ORDER_PRELOAD, ORDER_LOAD, ORDER_ERROR} from "../actions/order";
 const initialState = {
   order: null,
@@ -26,6 +28,8 @@ export const pushOrder = (ingredientIds) => {
     newOrder(ingredientIds).then(res => {
       if (res && res.success) {
         dispatch({type: ORDER_LOAD, payload: res})
+        dispatch({type: CLEAR_INGREDIENTS})
+        dispatch({type: CLEAR_COUNTERS})
       } else {
         dispatch({type: ORDER_ERROR, payload: res.message})
       }

@@ -2,6 +2,7 @@ import styles from './list-ingredient.module.css'
 import BurgerIngredient from '../burger-ingredient/burger-ingredient';
 import { CATEGORY_ON_RUSSIAN, TYPE_OF_CATEGORY } from '../../utils/constants';
 import PropTypes from 'prop-types';
+import { v4 as uuidv4 } from 'uuid';
 import React from 'react';
 
 const ListIngredient = (props) => {
