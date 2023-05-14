@@ -1,6 +1,6 @@
 import { API_URL, ORDER_URL } from "./constants";
 
-const getIngredients = () => {
+const getIngredientsAPI = () => {
   return fetch(API_URL
     ).then((res) => {
       return res.ok ? res.json() : res.json().then((err) => Promise.reject({error: true, message: err.message}))
@@ -24,6 +24,6 @@ const newOrder = (ingredients) => {
 }
 
 export {
-  getIngredients,
+  getIngredientsAPI,
   newOrder
 }

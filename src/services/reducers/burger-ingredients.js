@@ -1,4 +1,4 @@
-import { getIngredients } from "../../utils/api";
+import { getIngredientsAPI } from "../../utils/api";
 import {  INGREDIENT_PRELOAD, INGREDIENT_LOAD, INGREDIENT_ERROR, INGREDIENT_INC_COUNTER, INGREDIENT_DEC_COUNTER, CLEAR_COUNTERS} from "../actions/burger-ingredients"; 
 const initialState = {
   ingredients: [],
@@ -27,10 +27,10 @@ export const burgerIngredientsReducer = (state = initialState, action) => {
   }
 }
 
-export const getIngredientsAction = () => {
+export const getIngredients = () => {
   return function(dispatch) {
     dispatch({type: INGREDIENT_PRELOAD})
-    getIngredients().then(res => {
+    getIngredientsAPI().then(res => {
       if (res && res.success) {
         dispatch({type: INGREDIENT_LOAD, payload: res.data})
       } else {

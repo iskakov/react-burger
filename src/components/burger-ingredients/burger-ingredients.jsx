@@ -4,7 +4,7 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import ListIngredient from '../list-ingredient/list-ingredient'
 import { TYPE_OF_CATEGORY } from '../../utils/constants';
 import { useDispatch, useSelector} from 'react-redux';
-import { getIngredientsAction } from '../../services/reducers/burger-ingredients';
+import { getIngredients } from '../../services/reducers/burger-ingredients';
 import { getBurgerIngredients } from '../../services/store';
 
 const BurgerIngredients = () => {
@@ -12,7 +12,7 @@ const BurgerIngredients = () => {
   const dispatch = useDispatch();
   const {ingredients, ingredientsPreload, ingredientsError, errorMessage} = useSelector(getBurgerIngredients)
   React.useEffect(() => {
-    dispatch(getIngredientsAction())
+    dispatch(getIngredients())
   }, [dispatch]);
 
   const onChangeTab = (currTab) => {

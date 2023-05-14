@@ -25,7 +25,7 @@ const BurgerConstructor = () => {
       }
     },
   }); 
-  const submit = async (e) => {
+  const submit = (e) => {
     e.preventDefault();
     dispatch(pushOrder({ingredients: ingredients.map(item => item['_id'])}))
     setVisibleOrder(true);
