@@ -27,7 +27,7 @@ const BurgerConstructor = () => {
   }); 
   const submit = (e) => {
     e.preventDefault();
-    dispatch(pushOrder({ingredients: ingredients.map(item => item['_id'])}))
+    dispatch(pushOrder({ingredients: [ bun['_id'], ...ingredients.map(item => item['_id'])]}))
     setVisibleOrder(true);
   }
   const totalPrice = React.useMemo(()=> {
