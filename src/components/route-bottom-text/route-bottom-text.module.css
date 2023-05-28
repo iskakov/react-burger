@@ -1,0 +1,9 @@
+.bottomButton {
+  padding: 0;
+  color: #4c4cff;
+  text-decoration: none;
+  transition: all .3s ease-in;
+}
+.bottomButton:hover {
+  color: white
+}

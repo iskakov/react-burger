@@ -4,6 +4,13 @@
   align-items: center;
   text-decoration: none;
 }
-.nav-link:visited {
-  color: white;
+
+.link {
+  padding: 0;
+  text-decoration: none;
+  transition: all .3s ease-in;
 }
+.link:hover {
+  color: white
+}
+.link:visited {}

@@ -1,6 +1,6 @@
 import { TYPE_OF_CATEGORY, bubleSort } from "../../utils/constants";
 import { ADD_INGREDIENT, DEL_INGREDIENT, CLEAR_INGREDIENTS, SORT, CHANGE_ORDER, CHANGE_DRAG, ADD_BUN, DEL_BUN} from "../actions/burger-constructor";
-import { INGREDIENT_INC_COUNTER, INGREDIENT_DEC_COUNTER} from "../actions/burger-ingredients"; 
+import { INGREDIENTS_INC_COUNTER, INGREDIENTS_DEC_COUNTER} from "../actions/burger-ingredients"; 
 
 const initialState = {
   bun: null,
@@ -35,11 +35,11 @@ export const addIngredient = (ingredient, uuid) => {
     const add = (isBun, order) => {
       if (isBun) {
         dispatch({type: ADD_BUN, payload: ingredient})
-        dispatch({type: INGREDIENT_INC_COUNTER, payload: ingredient['_id']})
+        dispatch({type: INGREDIENTS_INC_COUNTER, payload: ingredient['_id']})
       } else {
         dispatch({type: ADD_INGREDIENT, payload: ingredient, order, uuid})
       }
-      dispatch({type: INGREDIENT_INC_COUNTER, payload: ingredient['_id']})
+      dispatch({type: INGREDIENTS_INC_COUNTER, payload: ingredient['_id']})
     }
     const state = stateFunction();
     const order =  Math.max(...state.burgerConstructor.ingredients.map(item => item.order))
@@ -60,11 +60,11 @@ export const delIngredient = (ingredient, isBun) => {
   return function(dispatch) {
     if (isBun) {
       dispatch({type: DEL_BUN})
-      dispatch({type: INGREDIENT_DEC_COUNTER, payload: ingredient['_id']})
+      dispatch({type: INGREDIENTS_DEC_COUNTER, payload: ingredient['_id']})
     } else {
       dispatch({type: DEL_INGREDIENT, payload: ingredient})
     }
-    dispatch({type: INGREDIENT_DEC_COUNTER, payload: ingredient['_id']})
+    dispatch({type: INGREDIENTS_DEC_COUNTER, payload: ingredient['_id']})
   }
 }
 

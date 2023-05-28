@@ -4,11 +4,3 @@
   width: 100%;
   height: calc(100vh - 88px);
 }
-
-.loading {
-  align-items: center;
-}
-.error {
-  composes: loading;
-  color: red;
-}
