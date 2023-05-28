@@ -2,17 +2,21 @@ import React from 'react';
 import styles from './ingredient-details.module.css';
 import InfoIngredient from '../info-ingredient/info-ingredient';
 import { BURGER_TYPE } from '../../utils/constants';
+import { useSelector} from 'react-redux';
+import { getBurgerIngredient } from '../../services/store';
 
-const IngredientDetails = (props) => {
+const IngredientDetails = () => {
+  const {ingredient} = useSelector(getBurgerIngredient)
+
   return (
     <section className={styles.main}>
-      <img className={styles.img} alt='' src={props.image_large}/>
-      <span className='text text_type_main-medium mt-4'>{props.name}</span>
+      <img className={styles.img} alt='' src={ingredient.image_large}/>
+      <span className='text text_type_main-medium mt-4'>{ingredient.name}</span>
       <section className={styles.infoBlock + ' mt-8 m'}>
-        <InfoIngredient name='Калории, ккал' number={props.calories}/>
-        <InfoIngredient name='Белки, г' number={props.proteins}/>
-        <InfoIngredient name='Жиры, г' number={props.fat}/>
-        <InfoIngredient name='Углеводы, г' number={props.carbohydrates}/>
+        <InfoIngredient name='Калории, ккал' number={ingredient.calories}/>
+        <InfoIngredient name='Белки, г' number={ingredient.proteins}/>
+        <InfoIngredient name='Жиры, г' number={ingredient.fat}/>
+        <InfoIngredient name='Углеводы, г' number={ingredient.carbohydrates}/>
       </section>
     </section>
   );

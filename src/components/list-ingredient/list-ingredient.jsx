@@ -2,6 +2,7 @@ import styles from './list-ingredient.module.css'
 import BurgerIngredient from '../burger-ingredient/burger-ingredient';
 import { CATEGORY_ON_RUSSIAN, TYPE_OF_CATEGORY } from '../../utils/constants';
 import PropTypes from 'prop-types';
+import { v4 as uuidv4 } from 'uuid';
 import React from 'react';
 
 const ListIngredient = (props) => {
@@ -14,7 +15,7 @@ const ListIngredient = (props) => {
         };
       });
     }, {
-      threshold: [0.5, 1]
+      threshold: [0.6, 1]
     })
     observer.observe(document.getElementById(TYPE_OF_CATEGORY.bun));
     observer.observe(document.getElementById(TYPE_OF_CATEGORY.sauce));
@@ -27,7 +28,7 @@ const ListIngredient = (props) => {
       <span className='pt-10 text text_type_main-medium'>{CATEGORY_ON_RUSSIAN[props.id]}</span>
       <section>
         {props.data.map((item) => 
-          (<BurgerIngredient key={item['_id']} {...item} addIngredient={props.addIngredient}/>)
+          (<BurgerIngredient key={item['_id']} ingredient={item} />)
         )}
       </section>
     </section>
@@ -36,7 +37,6 @@ const ListIngredient = (props) => {
 
 ListIngredient.propTypes = {
   id: PropTypes.string.isRequired,
-  addIngredient: PropTypes.func.isRequired,
   scrollTo: PropTypes.func.isRequired
 }
 

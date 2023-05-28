@@ -8,6 +8,7 @@ const TYPE_OF_CATEGORY = {
 }
 
 const API_URL = 'https://norma.nomoreparties.space/api/ingredients';
+const ORDER_URL = 'https://norma.nomoreparties.space/api/orders';
 
 const BURGER_INGREDIENT_TYPE = PropTypes.shape({
   '_id': PropTypes.string.isRequired,
@@ -62,11 +63,25 @@ const getNavIcon = (icon, active) => {
   return icon;
 }
 
+function bubleSort(first, second) {
+  if (first.order > second.order) {
+    return 1;
+  }
+
+  if (first.order < second.order) {
+    return -1;
+  }
+
+  return 0;
+}
+
 export {
   TYPE_OF_CATEGORY,
   BURGER_INGREDIENT_TYPE,
   BURGER_TYPE,
   CATEGORY_ON_RUSSIAN,
   API_URL,
-  getNavIcon
+  ORDER_URL,
+  getNavIcon,
+  bubleSort
 }
