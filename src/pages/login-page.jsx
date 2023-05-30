@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './login-page.module.css';
 import { Button, EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import RouteBottomText from '../components/route-bottom-text/route-bottom-text';
-import { login } from '../services/reducers/user';
+import { login } from '../services/actions/user';
 import { useDispatch } from 'react-redux';
 
 export default function LoginPage() {
@@ -16,8 +16,7 @@ export default function LoginPage() {
     dispatch(login({email, password}))
   }
   return (
-    <>
-      <form className={styles.main} onSubmit={onSubmit}>
+    <form className={styles.main} onSubmit={onSubmit}>
       <span className="text text_type_main-medium">Вход</span>
       <EmailInput
         onChange={e => setEmail(e.target.value)}
@@ -39,6 +38,5 @@ export default function LoginPage() {
       <RouteBottomText className='mt-10' text='Вы новый пользователь ?' link='/register' linkText='Зарегистрироваться'/>
       <RouteBottomText className='mt-1' text='Забыли пароль ?' link='/forgot-password' linkText='Восстановить пароль'/>
     </form>
-    </>
   )
 }

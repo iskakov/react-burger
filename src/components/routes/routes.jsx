@@ -10,10 +10,10 @@ import NotFoundPage from '../../pages/404-not-found-page'
 import ProtectedRouteElement from '../protected-route-element/protected-route-element';
 import PublicRouteElement from '../public-route-element/public-route-element';
 import LogoutPage from '../../pages/logout-page';
-import IngredientDetails from '../ingredient-details/ingredient-details';
 import AppHeader from '../app-header/app-header';
 import IngredientPage from '../../pages/ingredient-page';
 import Profile from '../profile/profile';
+import ModalIngredient from '../modal-ingredient/modal-ingredient';
 
 export default function ListRoutes() {
   const {state} = useLocation()
@@ -23,7 +23,7 @@ export default function ListRoutes() {
       <AppHeader/>
       <Routes>
         <Route path='/' element={<ConstructoPage />}> 
-          {state && <Route path='ingredients/:id' element={<IngredientDetails />}/>}
+          {state && <Route path='ingredients/:id' element={<ModalIngredient />}/>}
         </Route>
         <Route path='/login' element={<PublicRouteElement element={<LoginPage />} />}/>
         <Route path='/logout' element={<LogoutPage />}/> 

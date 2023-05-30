@@ -4,7 +4,7 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import ListIngredient from '../list-ingredient/list-ingredient'
 import { TYPE_OF_CATEGORY } from '../../utils/constants';
 import { useDispatch, useSelector} from 'react-redux';
-import { getIngredients } from '../../services/reducers/burger-ingredients';
+import { getIngredients } from '../../services/actions/burger-ingredients';
 import { getBurgerIngredients } from '../../services/store';
 
 const BurgerIngredients = () => {
@@ -44,11 +44,11 @@ const BurgerIngredients = () => {
             <Tab value={TYPE_OF_CATEGORY.bun} active={currentTab === TYPE_OF_CATEGORY.bun} onClick={onChangeTab}>
               Булки
             </Tab>
-            <Tab value={TYPE_OF_CATEGORY.sauce} active={currentTab === TYPE_OF_CATEGORY.sauce} onClick={onChangeTab}>
-              Соусы
-            </Tab>
             <Tab value={TYPE_OF_CATEGORY.main} active={currentTab === TYPE_OF_CATEGORY.main} onClick={onChangeTab}>
               Начинки
+            </Tab>
+            <Tab value={TYPE_OF_CATEGORY.sauce} active={currentTab === TYPE_OF_CATEGORY.sauce} onClick={onChangeTab}>
+              Соусы
             </Tab>
           </section>
             <section className={styles.categories}>

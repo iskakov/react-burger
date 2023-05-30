@@ -2,9 +2,8 @@ import React from 'react'
 import styles from './register-page.module.css';
 import { Button, EmailInput, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import RouteBottomText from '../components/route-bottom-text/route-bottom-text';
-import AppHeader from '../components/app-header/app-header';
 import { useNavigate } from 'react-router-dom';
-import { register } from '../services/reducers/user';
+import { register } from '../services/actions/user';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserStore } from '../services/store';
 
@@ -27,39 +26,37 @@ export default function RegisterPage() {
     }
   }, [user])
   return (
-    <>
-      <form className={styles.main} onSubmit={onSubmit}>
-        <span className="text text_type_main-medium">Регистрация</span>
-        <Input
-          type={'text'}
-          placeholder={'Имя'}
-          onChange={e => setName(e.target.value)}
-          value={name}
-          name={'name'}
-          error={false}
-          errorText={'Неправильный имя'}
-          size={'default'}
-          extraClass="mt-6"
-        />
-        <EmailInput
-          onChange={e => setEmail(e.target.value)}
-          value={email}
-          name={'email'}
-          placeholder="E-mail"
-          isIcon={true}
-          extraClass="mt-6"
-        />
-        <PasswordInput
-          onChange={e => setPassword(e.target.value)}
-          value={password}
-          name={'password'}
-          extraClass="mt-6"
-        />
-        <Button htmlType="submit" type="primary" size="large" extraClass='mt-6 mb-10'>
-          Зарегистрироваться
-        </Button>
-        <RouteBottomText className='mt-10' text='Уже зарегистрованы ?' link='/login' linkText='Войти'/>
-      </form>
-    </>
+    <form className={styles.main} onSubmit={onSubmit}>
+      <span className="text text_type_main-medium">Регистрация</span>
+      <Input
+        type={'text'}
+        placeholder={'Имя'}
+        onChange={e => setName(e.target.value)}
+        value={name}
+        name={'name'}
+        error={false}
+        errorText={'Неправильный имя'}
+        size={'default'}
+        extraClass="mt-6"
+      />
+      <EmailInput
+        onChange={e => setEmail(e.target.value)}
+        value={email}
+        name={'email'}
+        placeholder="E-mail"
+        isIcon={true}
+        extraClass="mt-6"
+      />
+      <PasswordInput
+        onChange={e => setPassword(e.target.value)}
+        value={password}
+        name={'password'}
+        extraClass="mt-6"
+      />
+      <Button htmlType="submit" type="primary" size="large" extraClass='mt-6 mb-10'>
+        Зарегистрироваться
+      </Button>
+      <RouteBottomText className='mt-10' text='Уже зарегистрованы ?' link='/login' linkText='Войти'/>
+    </form>
   )
 }

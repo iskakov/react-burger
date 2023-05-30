@@ -1,39 +1,35 @@
 import { INGREDIENTS_URL, INGREDIENT_URL, LOGIN_URL, LOGOUT_URL, MAIL_URL, ORDER_URL, REFRESH_TOKEN_URL, REGISTER_URL, RESET_PASSWORD_URL, USER_URL } from "./constants";
 import { getCookie } from "./cookie";
 
+const checkResponse = (res) => {
+  return res.ok ? res.json() : res.json().then((err) => Promise.reject({error: true, message: err.message}))
+}
+function request(url, options) {
+  return fetch(url, options).then(checkResponse)
+}
+
 const getIngredientsAPI = () => {
-  return fetch(INGREDIENTS_URL, {
+  return request(INGREDIENTS_URL, {
     method: 'GET',
     headers: {
       "Content-Type": "application/json",
       "authorization": getCookie('accessToken')
     }
-  }
-    ).then((res) => {
-      return res.ok ? res.json() : res.json().then((err) => Promise.reject({error: true, message: err.message}))
-  }).catch(() => {
-    return Promise.reject({error: true, message: 'Проверьте правильность запроса'})
-  });
+  })
 }
 
 const getIngredientAPI = (id) => {
-  return fetch(`${INGREDIENT_URL}/${id}`, {
+  return request(`${INGREDIENT_URL}/${id}`, {
     method: 'GET',
     headers: {
       "Content-Type": "application/json",
       "authorization": getCookie('accessToken')
     }
-  }
-    ).then((res) => {
-      return res.ok ? res.json() : res.json().then((err) => Promise.reject({error: true, message: err.message}))
-  }).catch(() => {
-    return Promise.reject({error: true, message: 'Проверьте правильность запроса'})
-  });
+  })
 }
 
-
 const newOrder = (ingredients) => {
-  return fetch(ORDER_URL, {
+  return request(ORDER_URL, {
     method: 'POST',
     body: JSON.stringify(ingredients),
     headers: {
@@ -41,15 +37,11 @@ const newOrder = (ingredients) => {
       "authorization": getCookie('accessToken')
 
     },
-  }).then((res) => {
-      return res.ok ? res.json() : res.json().then((err) => Promise.reject({error: true, message: err.message}))
-  }).catch((e) => {
-    return Promise.reject({error: true, message: e.message})
-  });
+  })
 }
 
 const loginAPI = (data) => {
-  return fetch(LOGIN_URL, {
+  return request(LOGIN_URL, {
     method: 'POST',
     body: JSON.stringify(data),
     headers: {
@@ -57,118 +49,79 @@ const loginAPI = (data) => {
       "authorization": getCookie('accessToken')
 
     }
-  }
-    ).then((res) => {
-      return res.ok ? res.json() : res.json().then((err) => Promise.reject({error: true, message: err.message}))
-  }).catch(() => {
-    return Promise.reject({error: true, message: 'Проверьте правильность запроса'})
-  });
+  })
 }
 
 const getUserAPI = () => {
-  return fetch(USER_URL, {
+  return request(USER_URL, {
     method: 'GET',
     headers: {
       "Content-Type": "application/json",
       "authorization": getCookie('accessToken')
     }
-  }
-    ).then((res) => {
-      return res.ok ? res.json() : res.json().then((err) => Promise.reject({error: true, message: err.message}))
-  }).catch(() => {
-    return Promise.reject({error: true, message: 'Проверьте правильность запроса'})
-  });
+  })
 }
 
 const updateUserAPI = (data) => {
-  return fetch(USER_URL, {
+  return request(USER_URL, {
     method: 'PATCH',
     body: JSON.stringify(data),
     headers: {
       "Content-Type": "application/json",
       "authorization": getCookie('accessToken')
     }
-  }
-    ).then((res) => {
-      return res.ok ? res.json() : res.json().then((err) => Promise.reject({error: true, message: err.message}))
-  }).catch(() => {
-    return Promise.reject({error: true, message: 'Проверьте правильность запроса'})
-  });
+  })
 }
 
 const registerAPI = (data) => {
-  return fetch(REGISTER_URL, {
+  return request(REGISTER_URL, {
     method: 'POST',
     body: JSON.stringify(data),
     headers: {
       "Content-Type": "application/json",
       
     }
-  }
-    ).then((res) => {
-      return res.ok ? res.json() : res.json().then((err) => Promise.reject({error: true, message: err.message}))
-  }).catch(() => {
-    return Promise.reject({error: true, message: 'Проверьте правильность запроса'})
-  });
+  })
 }
 
 const resetPasswordAPI = (data) => {
-  return fetch(RESET_PASSWORD_URL, {
+  return request(RESET_PASSWORD_URL, {
     method: 'POST',
     body: JSON.stringify(data),
     headers: {
       "Content-Type": "application/json",
     }
-  }
-    ).then((res) => {
-      return res.ok ? res.json() : res.json().then((err) => Promise.reject({error: true, message: err.message}))
-  }).catch(() => {
-    return Promise.reject({error: true, message: 'Проверьте правильность запроса'})
-  });
+  })
 }
 
 const logoutAPI = (data) => {
-  return fetch(LOGOUT_URL, {
+  return request(LOGOUT_URL, {
     method: 'POST',
     body: JSON.stringify(data),
     headers: {
       "Content-Type": "application/json",
     }
-  }).then((res) => {
-      return res.ok;
-  }).catch(() => {
-    return Promise.reject({error: true, message: 'Проверьте правильность запроса'})
-  });
+  })
 }
 
 const refreshTokenAPI = (data) => {
-  return fetch(REFRESH_TOKEN_URL, {
+  return request(REFRESH_TOKEN_URL, {
     method: 'POST',
     body: JSON.stringify(data),
     headers: {
       "Content-Type": "application/json",
     }
-  }
-    ).then((res) => {
-      return res.ok ? res.json() : res.json().then((err) => Promise.reject({error: true, message: err.message}))
-  }).catch(() => {
-    return Promise.reject({error: true, message: 'Проверьте правильность запроса'})
-  });
+  })
 }
 
 const checkMailAPI = (data) => {
-  return fetch(MAIL_URL, {
+  return request(MAIL_URL, {
     method: 'POST',
     body: JSON.stringify(data),
     headers: {
       "Content-Type": "application/json",
     }
-  }
-    ).then((res) => {
-      return res.ok ? res.json() : res.json().then((err) => Promise.reject({error: true, message: err.message}))
-  }).catch(() => {
-    return Promise.reject({error: true, message: 'Проверьте правильность запроса'})
-  });
+  })
 }
 
 

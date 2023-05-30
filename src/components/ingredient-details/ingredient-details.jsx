@@ -4,7 +4,7 @@ import InfoIngredient from '../info-ingredient/info-ingredient';
 import { useDispatch, useSelector} from 'react-redux';
 import { getBurgerIngredient } from '../../services/store';
 import { useLocation, useParams } from 'react-router-dom';
-import { getIngredient } from '../../services/reducers/burger-ingredient';
+import { getIngredient } from '../../services/actions/burger-ingredient';
 
 const IngredientDetails = () => {
   const {ingredient} = useSelector(getBurgerIngredient)

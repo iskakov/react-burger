@@ -4,8 +4,7 @@ import { BURGER_INGREDIENT_TYPE, TYPE_OF_CATEGORY } from '../../utils/constants'
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDispatch } from 'react-redux';
 import { useDrag, useDrop } from "react-dnd";
-import { delIngredient, sortingIngredients } from '../../services/reducers/burger-constructor';
-import PropTypes from 'prop-types'
+import { delIngredient, sortingIngredients } from '../../services/actions/burger-constructor';
 import { CHANGE_DRAG } from '../../services/actions/burger-constructor';
 
 export default function ConstructorItem({ingredient}) {
@@ -62,11 +61,11 @@ export default function ConstructorItem({ingredient}) {
     if (!ingredient.isDrag && isDrag) {
       dispatch({type: CHANGE_DRAG, uuid: ingredient.uuid, isDrag})
     }
-  }, [isDrag, dispatch])
+  }, [isDrag, dispatch, ingredient.isDrag, ingredient.uuid])
   drag(drop(ref))
   const chageOrder = React.useCallback((dragIndex,hoverIndex) => {
     dispatch(sortingIngredients(dragIndex, hoverIndex))
-  }, []) 
+  }, [dispatch]) 
 
   return (
     <section draggable ref={ref} style={{opacity: ingredient.isDrag ? 0 : 1}} data-handler-id={handlerId}

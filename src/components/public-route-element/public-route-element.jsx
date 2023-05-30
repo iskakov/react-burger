@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useDispatch, useSelector} from 'react-redux';
 import { Navigate, useLocation } from 'react-router-dom';
-import { getUser } from '../../services/reducers/user';
+import { getUser } from '../../services/actions/user';
 import { getUserStore } from '../../services/store';
 
 export default function PublicRouteElement({element}) {

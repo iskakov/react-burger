@@ -1,4 +1,3 @@
-import { getIngredientAPI, getIngredientsAPI } from "../../utils/api"
 import { SELECT_INGREDIENT, CLEAR_IGREDIENT, INGREDIENT_LOAD, INGREDIENT_ERROR, INGREDIENT_PRELOAD} from "../actions/burger-ingredient"
 
 const initialState = {
@@ -24,17 +23,4 @@ export const burgerIngredientReducer = (state = initialState, action) => {
     default:
       return state
   }
-}
-
-export const getIngredient = (id) => {
-  return function(dispatch) {
-    dispatch({type: INGREDIENT_PRELOAD})
-    getIngredientsAPI().then(res => {
-      if (res && res.success) {
-        dispatch({type: INGREDIENT_LOAD, payload: res.data.find(item => item['_id'] === id)})
-      } else {
-        dispatch({type: INGREDIENT_ERROR, payload: res.message})
-      }
-    });
-  };
 }

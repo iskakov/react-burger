@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 const BurgerIngredient = ({ingredient}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate()
-  const [{ isDrag }, dragRef] = useDrag({
+  const [, dragRef] = useDrag({
     type: "ingredients",
     item: { ingredient, fromIngredients: true },
     collect: monitor => ({

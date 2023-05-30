@@ -8,17 +8,18 @@ import { LOGOUT_LOAD } from '../services/actions/user';
 export default function LogoutPage() {
   const dispatch = useDispatch();
   const navigation = useNavigate();
-  const init = async () => {
-    logoutAPI({token: getCookie('refreshToken')}).then(res => {
-      if (res) {
-        dispatch({type: LOGOUT_LOAD})
-        setCookie('accessToken', '')
-        setCookie('refreshToken', '')
-        navigation('/login')
-      }
-    })
-  }
+
   React.useEffect(() => {
+    const init = async () => {
+      logoutAPI({token: getCookie('refreshToken')}).then(res => {
+        if (res) {
+          dispatch({type: LOGOUT_LOAD})
+          setCookie('accessToken', '')
+          setCookie('refreshToken', '')
+          navigation('/login')
+        }
+      })
+    }
     init();
   }, [])
   return <></>

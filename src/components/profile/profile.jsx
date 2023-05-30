@@ -2,7 +2,7 @@ import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-component
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getUserStore } from '../../services/store'
-import { getUser, updateUser } from '../../services/reducers/user'
+import { getUser, updateUser } from '../../services/actions/user'
 import styles from './profile.module.css';
 
 export default function Profile() {
