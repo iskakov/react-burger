@@ -5,11 +5,12 @@ import { useDispatch} from 'react-redux';
 import { SELECT_INGREDIENT } from '../../services/actions/burger-ingredient';
 import { useDrag } from "react-dnd";
 import { BURGER_INGREDIENT_TYPE } from '../../utils/constants';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const BurgerIngredient = ({ingredient}) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const location = useLocation();
   const [, dragRef] = useDrag({
     type: "ingredients",
     item: { ingredient, fromIngredients: true },
@@ -21,8 +22,7 @@ const BurgerIngredient = ({ingredient}) => {
 
   const addIngredientAction = () => {
     dispatch({type: SELECT_INGREDIENT, payload: ingredient})
-    const initialState = [{ path: '/ingredients/' + ingredient['_id'], url: '/ingredients/' + ingredient['_id'], title: 'show ingredient' }];
-    navigate('/ingredients/' + ingredient['_id'], { replace:true, state:initialState })
+    navigate('/ingredients/' + ingredient['_id'], { replace:true, state: {from: location} })
   }
   return (
       <div className={styles.main + ' mt-6 mb-2 mr-4 ml-2'}

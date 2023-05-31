@@ -7,16 +7,16 @@ const TYPE_OF_CATEGORY = {
   main: 'main'
 }
 
-const INGREDIENTS_URL = 'https://norma.nomoreparties.space/api/ingredients';
-const INGREDIENT_URL = 'https://norma.nomoreparties.space/api/ingredient';
-const LOGIN_URL = 'https://norma.nomoreparties.space/api/auth/login';
-const REGISTER_URL = 'https://norma.nomoreparties.space/api/auth/register';
-const LOGOUT_URL = 'https://norma.nomoreparties.space/api/auth/logout';
-const REFRESH_TOKEN_URL = 'https://norma.nomoreparties.space/api/auth/token';
-const MAIL_URL = 'https://norma.nomoreparties.space/api/password-reset';
+const BASE_URL = 'https://norma.nomoreparties.space/api';
+const INGREDIENTS_URL = `${BASE_URL}/ingredients`;
+const LOGIN_URL = `${BASE_URL}/login`;
+const REGISTER_URL = `${BASE_URL}/register`;
+const LOGOUT_URL = `${BASE_URL}/logout`;
+const REFRESH_TOKEN_URL = `${BASE_URL}token`;
+const MAIL_URL = `${BASE_URL}/password-reset`;
 const RESET_PASSWORD_URL = MAIL_URL + '/reset';
-const ORDER_URL = 'https://norma.nomoreparties.space/api/orders';
-const USER_URL = 'https://norma.nomoreparties.space/api/auth/user';
+const ORDER_URL = `${BASE_URL}/orders`;
+const USER_URL = `${BASE_URL}/user`;
 
 const BURGER_INGREDIENT_TYPE = PropTypes.shape({
   '_id': PropTypes.string.isRequired,
@@ -93,7 +93,6 @@ export {
   BURGER_TYPE,
   CATEGORY_ON_RUSSIAN,
   INGREDIENTS_URL,
-  INGREDIENT_URL,
   LOGIN_URL,
   LOGOUT_URL,
   REGISTER_URL,

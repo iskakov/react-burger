@@ -15,5 +15,5 @@ export default function PublicRouteElement({element}) {
   React.useEffect(() => {
     init();
   }, [])
-  return !user ? element : <Navigate to={state ? state[0].url : '/'} replace/>
+  return !user ? element : <Navigate to={state ? state.from.pathname : '/'} replace/>
 }

@@ -6,6 +6,7 @@ import IngredientDetails from '../components/ingredient-details/ingredient-detai
 export default function IngredientPage() {
   return (
     <section className={styles.main}>
+      <span className='text text_type_main-large'>Детали ингредиента</span>
       <IngredientDetails/>
     </section>
   )

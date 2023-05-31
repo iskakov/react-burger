@@ -3,14 +3,13 @@ import styles from './ingredient-details.module.css';
 import InfoIngredient from '../info-ingredient/info-ingredient';
 import { useDispatch, useSelector} from 'react-redux';
 import { getBurgerIngredient } from '../../services/store';
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { getIngredient } from '../../services/actions/burger-ingredient';
 
 const IngredientDetails = () => {
   const {ingredient} = useSelector(getBurgerIngredient)
   const {id} = useParams()
   const dispatch = useDispatch();
-  const {state} = useLocation()
 
   React.useEffect(() => {
     const init = () => {
@@ -19,11 +18,7 @@ const IngredientDetails = () => {
     init();
   }, [])
 
-  React.useEffect(() => {
-    if (!state) {
-      
-    }
-  }, [state])
+
 
   return ingredient && (
     <section className={styles.main}>

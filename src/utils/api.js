@@ -1,4 +1,4 @@
-import { INGREDIENTS_URL, INGREDIENT_URL, LOGIN_URL, LOGOUT_URL, MAIL_URL, ORDER_URL, REFRESH_TOKEN_URL, REGISTER_URL, RESET_PASSWORD_URL, USER_URL } from "./constants";
+import { INGREDIENTS_URL, LOGIN_URL, LOGOUT_URL, MAIL_URL, ORDER_URL, REFRESH_TOKEN_URL, REGISTER_URL, RESET_PASSWORD_URL, USER_URL } from "./constants";
 import { getCookie } from "./cookie";
 
 const checkResponse = (res) => {
@@ -10,16 +10,6 @@ function request(url, options) {
 
 const getIngredientsAPI = () => {
   return request(INGREDIENTS_URL, {
-    method: 'GET',
-    headers: {
-      "Content-Type": "application/json",
-      "authorization": getCookie('accessToken')
-    }
-  })
-}
-
-const getIngredientAPI = (id) => {
-  return request(`${INGREDIENT_URL}/${id}`, {
     method: 'GET',
     headers: {
       "Content-Type": "application/json",
@@ -127,7 +117,6 @@ const checkMailAPI = (data) => {
 
 export {
   getIngredientsAPI,
-  getIngredientAPI,
   newOrder,
   loginAPI,
   logoutAPI,
