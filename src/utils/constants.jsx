@@ -9,10 +9,10 @@ const TYPE_OF_CATEGORY = {
 
 const BASE_URL = 'https://norma.nomoreparties.space/api';
 const INGREDIENTS_URL = `${BASE_URL}/ingredients`;
-const LOGIN_URL = `${BASE_URL}/login`;
-const REGISTER_URL = `${BASE_URL}/register`;
-const LOGOUT_URL = `${BASE_URL}/logout`;
-const REFRESH_TOKEN_URL = `${BASE_URL}token`;
+const LOGIN_URL = `${BASE_URL}/auth/login`;
+const REGISTER_URL = `${BASE_URL}/auth/register`;
+const LOGOUT_URL = `${BASE_URL}/auth/logout`;
+const REFRESH_TOKEN_URL = `${BASE_URL}/auth/token`;
 const MAIL_URL = `${BASE_URL}/password-reset`;
 const RESET_PASSWORD_URL = MAIL_URL + '/reset';
 const ORDER_URL = `${BASE_URL}/orders`;
