@@ -16,7 +16,7 @@ const REFRESH_TOKEN_URL = `${BASE_URL}/auth/token`;
 const MAIL_URL = `${BASE_URL}/password-reset`;
 const RESET_PASSWORD_URL = MAIL_URL + '/reset';
 const ORDER_URL = `${BASE_URL}/orders`;
-const USER_URL = `${BASE_URL}/user`;
+const USER_URL = `${BASE_URL}/auth/user`;
 
 const BURGER_INGREDIENT_TYPE = PropTypes.shape({
   '_id': PropTypes.string.isRequired,
