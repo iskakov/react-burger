@@ -1,14 +1,26 @@
 import React from 'react';
 import styles from './ingredient-details.module.css';
 import InfoIngredient from '../info-ingredient/info-ingredient';
-import { BURGER_TYPE } from '../../utils/constants';
-import { useSelector} from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
 import { getBurgerIngredient } from '../../services/store';
+import { useParams } from 'react-router-dom';
+import { getIngredient } from '../../services/actions/burger-ingredient';
 
 const IngredientDetails = () => {
   const {ingredient} = useSelector(getBurgerIngredient)
+  const {id} = useParams()
+  const dispatch = useDispatch();
 
-  return (
+  React.useEffect(() => {
+    const init = () => {
+      dispatch(getIngredient(id))
+    }
+    init();
+  }, [])
+
+
+
+  return ingredient && (
     <section className={styles.main}>
       <img className={styles.img} alt='' src={ingredient.image_large}/>
       <span className='text text_type_main-medium mt-4'>{ingredient.name}</span>
@@ -21,5 +33,4 @@ const IngredientDetails = () => {
     </section>
   );
 }
-IngredientDetails.propTypes = BURGER_TYPE;
 export default IngredientDetails;

@@ -1,0 +1,39 @@
+.main {
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 120px;
+}
+.content {
+  width: 1280px;
+  justify-content: flex-start;
+  flex-direction: row;
+}
+.link {
+  padding: 0;
+  height: 64px;
+  text-decoration: none;
+  transition: all .3s ease-in;
+}
+.link:hover {
+  color: white
+}
+.link:visited {}
+
+.description {
+  word-wrap: break-word;
+}
+.links {
+  flex-direction: column;
+  width: 320px;
+}
+.topContent {
+  flex-direction: column;
+  margin-bottom: 80px;
+}
+.mainContent {
+  flex-direction: column;
+}
+.buttons {
+  justify-content: space-between;
+}

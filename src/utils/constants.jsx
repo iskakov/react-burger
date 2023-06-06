@@ -7,8 +7,16 @@ const TYPE_OF_CATEGORY = {
   main: 'main'
 }
 
-const API_URL = 'https://norma.nomoreparties.space/api/ingredients';
-const ORDER_URL = 'https://norma.nomoreparties.space/api/orders';
+const BASE_URL = 'https://norma.nomoreparties.space/api';
+const INGREDIENTS_URL = `${BASE_URL}/ingredients`;
+const LOGIN_URL = `${BASE_URL}/auth/login`;
+const REGISTER_URL = `${BASE_URL}/auth/register`;
+const LOGOUT_URL = `${BASE_URL}/auth/logout`;
+const REFRESH_TOKEN_URL = `${BASE_URL}/auth/token`;
+const MAIL_URL = `${BASE_URL}/password-reset`;
+const RESET_PASSWORD_URL = MAIL_URL + '/reset';
+const ORDER_URL = `${BASE_URL}/orders`;
+const USER_URL = `${BASE_URL}/auth/user`;
 
 const BURGER_INGREDIENT_TYPE = PropTypes.shape({
   '_id': PropTypes.string.isRequired,
@@ -39,6 +47,10 @@ const BURGER_TYPE = {
   image_mobile: PropTypes.string.isRequired,
   image_large: PropTypes.string.isRequired
 };
+
+const MAIN_ROUTE = '/';
+const PROFILE_ROUTE = '/profile';
+const INGREDIENT_ROUTE = '/ingredients/:id';
 
 const CATEGORY_ON_RUSSIAN = {
   [TYPE_OF_CATEGORY.bun]: 'Булки',
@@ -80,8 +92,18 @@ export {
   BURGER_INGREDIENT_TYPE,
   BURGER_TYPE,
   CATEGORY_ON_RUSSIAN,
-  API_URL,
+  INGREDIENTS_URL,
+  LOGIN_URL,
+  LOGOUT_URL,
+  REGISTER_URL,
+  RESET_PASSWORD_URL,
+  REFRESH_TOKEN_URL,
   ORDER_URL,
+  USER_URL,
+  MAIL_URL,
+  MAIN_ROUTE,
+  INGREDIENT_ROUTE,
+  PROFILE_ROUTE,
   getNavIcon,
   bubleSort
 }

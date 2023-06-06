@@ -2,7 +2,6 @@ import styles from './list-ingredient.module.css'
 import BurgerIngredient from '../burger-ingredient/burger-ingredient';
 import { CATEGORY_ON_RUSSIAN, TYPE_OF_CATEGORY } from '../../utils/constants';
 import PropTypes from 'prop-types';
-import { v4 as uuidv4 } from 'uuid';
 import React from 'react';
 
 const ListIngredient = (props) => {
@@ -21,7 +20,7 @@ const ListIngredient = (props) => {
     observer.observe(document.getElementById(TYPE_OF_CATEGORY.sauce));
     observer.observe(document.getElementById(TYPE_OF_CATEGORY.main));
     return () => observer.disconnect();
-  }, []);
+  }, [props]);
 
   return (
     <section id={props.id} className={styles.main}>

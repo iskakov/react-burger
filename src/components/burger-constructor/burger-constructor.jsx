@@ -5,12 +5,14 @@ import React from 'react';
 import Modal from '../modal/modal';
 import { useDispatch, useSelector} from 'react-redux';
 import OrderDetails from '../order-details/order-details';
-import { addIngredient } from '../../services/reducers/burger-constructor';
-import { pushOrder } from '../../services/reducers/order';
+import { addIngredient } from '../../services/actions/burger-constructor';
+import { pushOrder } from '../../services/actions/order';
 import { useDrop } from "react-dnd";
 import ConstructorItem from '../constructor-item/constructor-item';
 import { v4 as uuidv4 } from 'uuid';
 import { getBurgerConstructor, getOrder } from '../../services/store';
+import { getCookie } from '../../utils/cookie';
+import { useNavigate } from 'react-router-dom';
 
 const BurgerConstructor = () => {
   const [visibleOrder, setVisibleOrder] = React.useState(false);
@@ -24,15 +26,21 @@ const BurgerConstructor = () => {
         dispatch(addIngredient(item.ingredient, uuidv4()))
       }
     },
-  }); 
+  });
+  const navigate = useNavigate()
   const submit = (e) => {
     e.preventDefault();
-    dispatch(pushOrder({ingredients: [ bun['_id'], ...ingredients.map(item => item['_id'])]}))
-    setVisibleOrder(true);
+    if (getCookie('accessToken')) {
+      dispatch(pushOrder({ingredients: [ bun['_id'], ...ingredients.map(item => item['_id'])]}))
+      setVisibleOrder(true);
+    } else {
+      navigate('/login')
+    }
+    
   }
   const totalPrice = React.useMemo(()=> {
     return ingredients.reduce((accum, item) => accum += item.price, 0) + (bun ? bun.price : 0)
- }, [ingredients, bun])
+  }, [ingredients, bun])
   const itemConstructor = React.useCallback(item => {
     return (<ConstructorItem key={item.uuid} ingredient={item} />)
   },[]);
