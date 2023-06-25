@@ -1,7 +1,7 @@
-import React, { FC } from 'react'
+import React, { FC, HTMLAttributes } from 'react'
 import styles from './route-bottom-text.module.css';
 import {Link} from 'react-router-dom';
-interface IRouteBottomText {
+interface IRouteBottomText extends HTMLAttributes<any> {
   text: Readonly<string>;
   link: Readonly<string>;
   linkText: Readonly<string>;

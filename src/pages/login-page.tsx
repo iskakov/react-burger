@@ -7,13 +7,13 @@ import { useAppDispatch } from '../utils/hooks';
 
 const LoginPage: FC = () => {
 
-  const [email, setEmail] = React.useState('')
-  const [password, setPassword] = React.useState('')
+  const [email, setEmail] = React.useState<string>('')
+  const [password, setPassword] = React.useState<string>('')
   const dispatch = useAppDispatch();
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
-    dispatch(login({email, password}))
+    dispatch(login({email, password}) as any)
   }
   return (
     <form className={styles.main} onSubmit={onSubmit}>

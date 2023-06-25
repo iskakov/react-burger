@@ -8,28 +8,28 @@ import { useAppDispatch, useAppSelector } from '../../utils/hooks'
 const Profile: FC = () => {
   const {user} = useAppSelector(getUserStore)
   const dispatch = useAppDispatch()
-  const [name, setName] = React.useState('')
-  const [login, setLogin] = React.useState('')
-  const [password, setPassword] = React.useState('')
-  const [readonly, setReadonly] = React.useState(true)
-  const onIconClick = () => {
+  const [name, setName] = React.useState<string>('')
+  const [login, setLogin] = React.useState<string>('')
+  const [password, setPassword] = React.useState<string>('')
+  const [readonly, setReadonly] = React.useState<boolean>(true)
+  const onIconClick = (): void => {
     setReadonly(!readonly)
   }
-  const save = () => {
-    dispatch(updateUser({name, email: login, password}))
+  const save = (): void => {
+    dispatch(updateUser({name, email: login, password}) as any)
     setReadonly(!readonly)
     setPassword('')
 
   }
-  const cancel = () => {
+  const cancel = (): void => {
     setName(user.name)
     setLogin(user.email)
     setPassword('')
     setReadonly(!readonly)
   }
   React.useEffect(()=> {
-    const init = () => {
-      dispatch(getUser())
+    const init = (): void => {
+      dispatch(getUser() as any)
     }
     init()
   }, [])

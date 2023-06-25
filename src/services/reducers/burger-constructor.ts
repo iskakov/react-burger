@@ -1,8 +1,8 @@
-import { IBurgerType } from "../../utils/constants";
+import { IBurgerTypeConstructor } from "../../utils/constants";
 import { ADD_INGREDIENT, DEL_INGREDIENT, CLEAR_INGREDIENTS, SORT, CHANGE_ORDER, CHANGE_DRAG, ADD_BUN, DEL_BUN} from "../actions/burger-constructor";
 interface IBurgerConstructorType {
-  bun: IBurgerType | null;
-  ingredients: Array<IBurgerType>;
+  bun: IBurgerTypeConstructor | null;
+  ingredients: Array<IBurgerTypeConstructor>;
 }
 const initialState: IBurgerConstructorType = {
   bun: null,

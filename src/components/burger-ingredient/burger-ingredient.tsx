@@ -18,8 +18,7 @@ const BurgerIngredient: FC<IBurgerIngredientsType> = ({ingredient}) => {
     item: { ingredient }
   });
 
-
-  const addIngredientAction = () => {
+  const showIngredientInfo = (): void => {
     dispatch({type: SELECT_INGREDIENT, payload: ingredient})
     navigate('/ingredients/' + ingredient['_id'], { replace:true, state: {from: location} })
   }
@@ -27,7 +26,7 @@ const BurgerIngredient: FC<IBurgerIngredientsType> = ({ingredient}) => {
       <div className={styles.main + ' mt-6 mb-2 mr-4 ml-2'}
       draggable
       ref={dragRef}
-      onClick={addIngredientAction}>
+      onClick={showIngredientInfo}>
         {ingredient.count > 0 && (
           <section className={styles.counter}>
             <span className='text text_type_digits-default'>{ingredient.count}</span>

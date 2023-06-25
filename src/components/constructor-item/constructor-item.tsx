@@ -1,13 +1,13 @@
-import React, { FC } from 'react'
+import React, { Dispatch, FC } from 'react'
 import styles from './constructor-item.module.css'
-import { IBurgerType, TYPE_OF_CATEGORY } from '../../utils/constants'
+import { IBurgerTypeConstructor, TYPE_OF_CATEGORY } from '../../utils/constants'
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDrag, useDrop } from "react-dnd";
 import { delIngredient, sortingIngredients } from '../../services/actions/burger-constructor';
 import { CHANGE_DRAG } from '../../services/actions/burger-constructor';
 import { useAppDispatch } from '../../utils/hooks';
 interface IConstuctorItem {
-  ingredient: IBurgerType
+  ingredient: IBurgerTypeConstructor
 }
 interface IDragConstructoIngredients {
   id: Readonly<string>,
@@ -21,7 +21,7 @@ const ConstructorItem: FC<IConstuctorItem> = ({ingredient}) => {
   const dispatch = useAppDispatch();
 
   const delIngredientAction = (): void => {
-    dispatch(delIngredient(ingredient))
+    dispatch(delIngredient(ingredient) as any)
   }
   const ref = React.useRef<HTMLDivElement>(null)
   const [{ isDrag }, drag] = useDrag<IDragConstructoIngredients, unknown, IDragObject>({
@@ -71,7 +71,7 @@ const ConstructorItem: FC<IConstuctorItem> = ({ingredient}) => {
   }, [isDrag, dispatch, ingredient.isDrag, ingredient.uuid])
   drag(drop(ref))
   const chageOrder = React.useCallback((dragIndex,hoverIndex) => {
-    dispatch(sortingIngredients(dragIndex, hoverIndex))
+    dispatch(sortingIngredients(dragIndex, hoverIndex) as any)
   }, [dispatch]) 
 
   return (

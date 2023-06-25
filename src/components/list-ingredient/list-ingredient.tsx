@@ -1,12 +1,11 @@
 import styles from './list-ingredient.module.css'
 import BurgerIngredient from '../burger-ingredient/burger-ingredient';
 import { CATEGORY_ON_RUSSIAN, IBurgerType, TYPE_OF_CATEGORY } from '../../utils/constants';
-import PropTypes from 'prop-types';
 import React, { FC } from 'react';
 interface IListIngredient {
   id: string,
   data: Array<IBurgerType>;
-  scrollTo: (string) => void
+  scrollTo: (key: string) => void
 }
 const ListIngredient: FC<IListIngredient> = (props) => {
   React.useEffect(() => {
@@ -43,10 +42,4 @@ const ListIngredient: FC<IListIngredient> = (props) => {
     </section>
   );
 }
-
-ListIngredient.propTypes = {
-  id: PropTypes.string.isRequired,
-  scrollTo: PropTypes.func.isRequired
-}
-
 export default ListIngredient;

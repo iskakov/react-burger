@@ -12,10 +12,10 @@ const ForgotPasswordPage: FC = () => {
   const {mail} = useAppSelector(getUserStore)
   const dispatch = useAppDispatch();
 
-  const [email, setEmail] = React.useState('')
-  const onSubmit = (e) => {
+  const [email, setEmail] = React.useState<string>('')
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
-    dispatch(checkEmail({email}))
+    dispatch(checkEmail({email}) as any)
   }
   React.useEffect(() => {
     if (mail) {

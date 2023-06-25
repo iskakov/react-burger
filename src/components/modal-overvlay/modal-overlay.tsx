@@ -14,7 +14,7 @@ const ModalOverlay: FC<IModalOverlay> = ({onClose, children}) => {
     }
   })
 
-  const onKeyPress = (e) => {
+  const onKeyPress = (e: React.KeyboardEvent<HTMLElement>): void => {
     if (e.key === 'Escape') {
       onClose()
     }

@@ -7,6 +7,7 @@ enum TYPE_OF_CATEGORY {
   main = 'main'
 }
 
+
 const BASE_URL = 'https://norma.nomoreparties.space/api';
 const INGREDIENTS_URL = `${BASE_URL}/ingredients`;
 const LOGIN_URL = `${BASE_URL}/auth/login`;
@@ -18,8 +19,13 @@ const RESET_PASSWORD_URL = MAIL_URL + '/reset';
 const ORDER_URL = `${BASE_URL}/orders`;
 const USER_URL = `${BASE_URL}/auth/user`;
 
+type categries = TYPE_OF_CATEGORY.bun | TYPE_OF_CATEGORY.sauce | TYPE_OF_CATEGORY.main
 
-interface IBurgerType {
+export type TCategroies = {
+  [fw in categries]?: Array<IBurgerType>;
+}
+
+export interface IBurgerType {
   '_id': Readonly<string>;
   '__v': Readonly<number>;
   name: Readonly<string>;
@@ -32,10 +38,61 @@ interface IBurgerType {
   image: Readonly<string>;
   image_mobile: Readonly<string>;
   image_large: Readonly<string>;
-  order?: number;
   count?: number;
+};
+
+export interface IBurgerTypeConstructor extends IBurgerType {
+  order?: number;
   isDrag?: boolean;
   uuid?: string;
+}
+
+export interface IUser {
+  email: string,
+  password?: string,
+  name?: string
+}
+
+export interface IResetPassword extends IToken {
+  password: string
+}
+
+export interface ICheckEmail {
+  email: string
+}
+
+export interface IOrderBody {
+  number: number,
+  createdAt: string,
+  ingredients: Array<IBurgerType>,
+  name: string,
+  ownner: IUser,
+  price: number,
+  status: string,
+  updatedAt: string,
+  '_id': string
+}
+
+export interface IOrder {
+  name: string,
+  order: IOrderBody,
+  id: string
+}
+
+
+export interface IToken {
+  token: string
+}
+
+export type TResponseBody<TDataKey extends string = '', TDataType  = {}> = {
+  [fw in TDataKey]?: TDataType;
+} & {
+  success: boolean;
+  message?: string;
+  headers?: Headers;
+}& { 
+  accessToken: string;
+  refreshToken: string
 };
 
 const MAIN_ROUTE = '/';
@@ -66,7 +123,7 @@ const getNavIcon = (icon: string, active: boolean): ReactNode | null => {
   return iconNode;
 }
 
-function bubleSort(first: IBurgerType, second: IBurgerType) {
+function bubleSort(first: IBurgerTypeConstructor, second: IBurgerTypeConstructor): number {
   if (first.order && second.order) {
     if (first.order > second.order) {
       return 1;
@@ -80,7 +137,8 @@ function bubleSort(first: IBurgerType, second: IBurgerType) {
 }
 
 export {
-  TYPE_OF_CATEGORY, CATEGORY_ON_RUSSIAN,
+  TYPE_OF_CATEGORY,
+  CATEGORY_ON_RUSSIAN,
   INGREDIENTS_URL,
   LOGIN_URL,
   LOGOUT_URL,
@@ -96,4 +154,4 @@ export {
   getNavIcon,
   bubleSort
 };
-export type { IBurgerType };
+

@@ -10,14 +10,14 @@ import { useAppDispatch, useAppSelector } from '../utils/hooks';
 const RegisterPage: FC = () => {
   const navigate = useNavigate();
   const {user} = useAppSelector(getUserStore)
-  const [name, setName] = React.useState('')
-  const [email, setEmail] = React.useState('')
-  const [password, setPassword] = React.useState('')
+  const [name, setName] = React.useState<string>('')
+  const [email, setEmail] = React.useState<string>('')
+  const [password, setPassword] = React.useState<string>('')
   const dispatch = useAppDispatch();
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
-    dispatch(register({name, email, password}))
+    dispatch(register({name, email, password}) as any)
   }
 
   React.useEffect(() => {

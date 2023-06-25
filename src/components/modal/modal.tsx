@@ -12,7 +12,7 @@ interface IModal {
 
 const modalRoot = document.getElementById('react-modals');
 const Modal: FC<IModal> = ({onClose, header, children}) => {
-  const onClick = (e) => {
+  const onClick = (e: React.MouseEvent<HTMLElement>): void => {
     e.stopPropagation();
   }
   return modalRoot && createPortal(

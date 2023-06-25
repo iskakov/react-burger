@@ -13,8 +13,8 @@ export type RootState = ReturnType<typeof store.getState>
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch
 
-export const getBurgerIngredients = (store => store.burgerIngredients)
-export const getBurgerConstructor = (store => store.burgerConstructor)
-export const getBurgerIngredient = (store => store.burgerIngredient)
-export const getOrder = (store => store.order)
-export const getUserStore = (store => store.user)
+export const getBurgerIngredients = (store: RootState) => store.burgerIngredients
+export const getBurgerConstructor = (store: RootState) => store.burgerConstructor
+export const getBurgerIngredient = (store: RootState) => store.burgerIngredient
+export const getOrder = (store: RootState) => store.order
+export const getUserStore = (store: RootState) => store.user

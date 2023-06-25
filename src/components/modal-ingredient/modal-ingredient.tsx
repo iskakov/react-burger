@@ -8,7 +8,7 @@ import { useAppDispatch } from '../../utils/hooks';
 const ModalIngredient: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate()
-  const onClose = () => {
+  const onClose = (): void => {
     dispatch({type: CLEAR_IGREDIENT})
     navigate('/')
   }

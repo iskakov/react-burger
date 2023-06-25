@@ -14,36 +14,36 @@ import { getCookie } from '../../utils/cookie';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks';
 import { IBurgerIngredientsType } from '../burger-ingredient/burger-ingredient';
+import { IBurgerTypeConstructor } from '../../utils/constants';
 
 const BurgerConstructor: FC = () => {
-  const [visibleOrder, setVisibleOrder] = React.useState(false);
+  const [visibleOrder, setVisibleOrder] = React.useState<boolean>(false);
   const dispatch = useAppDispatch();
   const {ingredients, bun} = useAppSelector(getBurgerConstructor)
   const {orderPreload, orderError, errorMessage} = useAppSelector(getOrder)
   const [, dropTarget] = useDrop<IBurgerIngredientsType>({
     accept: "ingredients",
     drop(item) {
-      dispatch(addIngredient(item.ingredient, uuidv4()))
+      dispatch(addIngredient(item.ingredient, uuidv4()) as any)
     },
   });
   const navigate = useNavigate()
-  const submit = (e) => {
+  const submit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if (getCookie('accessToken')) {
-      dispatch(pushOrder({ingredients: [ bun['_id'], ...ingredients.map(item => item['_id'])]}))
+      dispatch(pushOrder({ingredients: [ bun['_id'], ...ingredients.map(item => item['_id'])]}) as any)
       setVisibleOrder(true);
     } else {
       navigate('/login')
     }
-    
   }
-  const totalPrice = React.useMemo(()=> {
+  const totalPrice = React.useMemo<number>(()=> {
     return ingredients.reduce((accum, item) => accum += item.price, 0) + (bun ? bun.price : 0)
   }, [ingredients, bun])
-  const itemConstructor = React.useCallback(item => {
+  const itemConstructor = React.useCallback<React.FC>((item: IBurgerTypeConstructor) => {
     return (<ConstructorItem key={item.uuid} ingredient={item} />)
   },[]);
-  const onCloseOrder = () => {
+  const onCloseOrder = (): void => {
     setVisibleOrder(false);
   }
   return (

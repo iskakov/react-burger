@@ -1,30 +1,30 @@
-import React from 'react'
+import React, { FC } from 'react'
 import styles from './burger-ingredients.module.css'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import ListIngredient from '../list-ingredient/list-ingredient'
-import { TYPE_OF_CATEGORY } from '../../utils/constants';
+import { TCategroies, TYPE_OF_CATEGORY } from '../../utils/constants';
 import { getIngredients } from '../../services/actions/burger-ingredients';
 import { getBurgerIngredients } from '../../services/store';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks';
 
-const BurgerIngredients = () => {
-  const [currentTab, setCurrentTab] = React.useState(TYPE_OF_CATEGORY.bun)
+const BurgerIngredients: FC = () => {
+  const [currentTab, setCurrentTab] = React.useState<TYPE_OF_CATEGORY>(TYPE_OF_CATEGORY.bun)
   const dispatch = useAppDispatch();
   const {ingredients, ingredientsPreload, ingredientsError, errorMessage} = useAppSelector(getBurgerIngredients)
   React.useEffect(() => {
-    dispatch(getIngredients())
+    dispatch(getIngredients() as any)
   }, [dispatch]);
 
-  const onChangeTab = (currTab) => {
+  const onChangeTab = (currTab: TYPE_OF_CATEGORY): void => {
     document.getElementById(currTab)?.scrollIntoView();
     setCurrentTab(currTab);
   }
 
-  const scrollTo = (currTab) => {
+  const scrollTo = (currTab: TYPE_OF_CATEGORY): void => {
     setCurrentTab(currTab);
   }
 
-  const categories = ingredients.reduce((accum, burgerIngredient) => {
+  const categories: TCategroies = ingredients.reduce((accum, burgerIngredient) => {
     if (!accum.hasOwnProperty(burgerIngredient.type)) {
       accum[burgerIngredient.type] = [];
     }

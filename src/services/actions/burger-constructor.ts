@@ -1,5 +1,5 @@
 import { ThunkAction } from "redux-thunk"
-import { IBurgerType, TYPE_OF_CATEGORY, bubleSort } from "../../utils/constants"
+import { IBurgerTypeConstructor, TYPE_OF_CATEGORY, bubleSort } from "../../utils/constants"
 import { RootState } from "../store"
 import { INGREDIENTS_DEC_COUNTER, INGREDIENTS_INC_COUNTER } from "./burger-ingredients"
 import { Action } from "redux"
@@ -13,7 +13,7 @@ export const CHANGE_ORDER = 'CHANGE_ORDER'
 export const CHANGE_DRAG = 'CHANGE_DRAG'
 export const SORT = 'SORT'
 
-export const addIngredient = (ingredient: IBurgerType, uuid: string): ThunkAction<void, RootState, unknown, Action<string>>  => {
+export const addIngredient = (ingredient: IBurgerTypeConstructor, uuid: string): ThunkAction<void, RootState, unknown, Action<string>>  => {
   return function(dispatch , stateFunction) {
     const add = (isBun: boolean, order?: number): void => {
       if (isBun) {
@@ -39,7 +39,7 @@ export const addIngredient = (ingredient: IBurgerType, uuid: string): ThunkActio
   }
 }
 
-export const delIngredient = (ingredient: IBurgerType, isBun?: boolean): ThunkAction<void, RootState, unknown, Action<string>> => {
+export const delIngredient = (ingredient: IBurgerTypeConstructor, isBun?: boolean): ThunkAction<void, RootState, unknown, Action<string>> => {
   return function(dispatch) {
     if (isBun) {
       dispatch({type: DEL_BUN})

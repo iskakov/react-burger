@@ -12,11 +12,11 @@ const ResetPasswordPage: FC = () => {
   const navigate = useNavigate();
   const {user} = useAppSelector(getUserStore)
   const {state} = useLocation();
-  const [code, setCode] = React.useState('')
-  const [password, setPassword] = React.useState('')
-  const onSubmit = (e) => {
+  const [code, setCode] = React.useState<string>('')
+  const [password, setPassword] = React.useState<string>('')
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
-    dispatch(changePassword({token: code, password}))
+    dispatch(changePassword({token: code, password}) as any)
   }
   React.useEffect(() => {
     if (!state) {
