@@ -20,7 +20,7 @@ const IngredientDetails: FC = () => {
 
   return ingredient && (
     <section className={styles.main}>
-      <img className={styles.img} alt='' src={ingredient.image_large}/>
+      <img className={styles.img} alt='Картинка ингредиента' src={ingredient.image_large}/>
       <span className='text text_type_main-medium mt-4'>{ingredient.name}</span>
       <section className={styles.infoBlock + ' mt-8 m'}>
         <InfoIngredient name='Калории, ккал' number={ingredient.calories}/>

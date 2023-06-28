@@ -1,14 +1,17 @@
 import { IBurgerType, ICheckEmail, INGREDIENTS_URL, IOrder, IResetPassword, IToken, IUser, LOGIN_URL, LOGOUT_URL, MAIL_URL, ORDER_URL, REFRESH_TOKEN_URL, REGISTER_URL, RESET_PASSWORD_URL, TResponseBody, USER_URL,  } from "./constants";
 import { getCookie } from "./cookie";
-
-const checkResponse = (res: Response): Promise<TResponseBody<'data', Array<IBurgerType>>>  | Promise<TResponseBody<'order', IOrder>> | Promise<TResponseBody<'user', IUser>>  => {
-  return res.ok ? res.json() : res.json().then((err: Error): Promise<TResponseBody>  => Promise.reject({error: true, message: err.message}))
+type TBurger = Promise<TResponseBody<'data', Array<IBurgerType>>> ;
+type TOrder = Promise<TResponseBody<'order', IOrder>> ;
+type TUser = Promise<TResponseBody<'user', IUser>> ;
+type TResponse = TBurger | TOrder | TUser;
+type TBody = Promise<TResponseBody>;
+const checkResponse = (res: Response): TResponse  => {
+  return res.ok ? res.json() : res.json().then((err: Error): TBody  => Promise.reject({error: true, message: err.message}))
 }
 
-const request = (url: RequestInfo, options?: RequestInit):
-| Promise<TResponseBody<'data', Array<IBurgerType>>> | Promise<TResponseBody<'order', IOrder>> |  Promise<TResponseBody<'user', IUser>>   => fetch(url, options).then(checkResponse).catch((err: Error): Promise<TResponseBody>  => Promise.reject({error: true, message: err.message}))
+const request = (url: RequestInfo, options?: RequestInit): TResponse   => fetch(url, options).then(checkResponse).catch((err: Error): TBody  => Promise.reject({error: true, message: err.message}))
 
-const getIngredientsAPI = (): Promise<TResponseBody<'data', Array<IBurgerType>>> => {
+const getIngredientsAPI = (): TBurger => {
   return request(INGREDIENTS_URL, {
     method: 'GET',
     headers: {
@@ -29,7 +32,7 @@ const newOrder = (ingredients: Array<string>): Promise<TResponseBody<'order', IO
   })
 }
 
-const loginAPI = (data: IUser): Promise<TResponseBody<'user', IUser>> => {
+const loginAPI = (data: IUser): TUser => {
   return request(LOGIN_URL, {
     method: 'POST',
     body: JSON.stringify(data),
@@ -40,7 +43,7 @@ const loginAPI = (data: IUser): Promise<TResponseBody<'user', IUser>> => {
   })
 }
 
-const getUserAPI = (): Promise<TResponseBody<'user', IUser>>  => {
+const getUserAPI = (): TUser  => {
   return request(USER_URL, {
     method: 'GET',
     headers: {
@@ -50,7 +53,7 @@ const getUserAPI = (): Promise<TResponseBody<'user', IUser>>  => {
   })
 }
 
-const updateUserAPI = (data: IUser): Promise<TResponseBody<'user', IUser>>  => {
+const updateUserAPI = (data: IUser): TUser  => {
   return request(USER_URL, {
     method: 'PATCH',
     body: JSON.stringify(data),
@@ -61,7 +64,7 @@ const updateUserAPI = (data: IUser): Promise<TResponseBody<'user', IUser>>  => {
   })
 }
 
-const registerAPI = (data: IUser): Promise<TResponseBody<'user', IUser>>  => {
+const registerAPI = (data: IUser): TUser  => {
   return request(REGISTER_URL, {
     method: 'POST',
     body: JSON.stringify(data),
@@ -72,7 +75,7 @@ const registerAPI = (data: IUser): Promise<TResponseBody<'user', IUser>>  => {
   })
 }
 
-const resetPasswordAPI = (data: IResetPassword): Promise<TResponseBody>  => {
+const resetPasswordAPI = (data: IResetPassword): TBody  => {
   return request(RESET_PASSWORD_URL, {
     method: 'POST',
     body: JSON.stringify(data),
@@ -82,7 +85,7 @@ const resetPasswordAPI = (data: IResetPassword): Promise<TResponseBody>  => {
   })
 }
 
-const logoutAPI = (data: IToken): Promise<TResponseBody>  => {
+const logoutAPI = (data: IToken): TBody  => {
   return request(LOGOUT_URL, {
     method: 'POST',
     body: JSON.stringify(data),
@@ -92,7 +95,7 @@ const logoutAPI = (data: IToken): Promise<TResponseBody>  => {
   })
 }
 
-const refreshTokenAPI = (data: IToken): Promise<TResponseBody> => {
+const refreshTokenAPI = (data: IToken): TBody => {
   return request(REFRESH_TOKEN_URL, {
     method: 'POST',
     body: JSON.stringify(data),
@@ -102,7 +105,7 @@ const refreshTokenAPI = (data: IToken): Promise<TResponseBody> => {
   })
 }
 
-const checkMailAPI = (data: ICheckEmail): Promise<TResponseBody> => {
+const checkMailAPI = (data: ICheckEmail): TBody => {
   return request(MAIL_URL, {
     method: 'POST',
     body: JSON.stringify(data),

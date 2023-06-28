@@ -90,7 +90,7 @@ export type TResponseBody<TDataKey extends string = '', TDataType  = {}> = {
   success: boolean;
   message?: string;
   headers?: Headers;
-}& { 
+} & {
   accessToken: string;
   refreshToken: string
 };
@@ -124,7 +124,7 @@ const getNavIcon = (icon: string, active: boolean): ReactNode | null => {
 }
 
 function bubleSort(first: IBurgerTypeConstructor, second: IBurgerTypeConstructor): number {
-  if (first.order && second.order) {
+  if (!isNaN(first.order) && !isNaN(second.order)) {
     if (first.order > second.order) {
       return 1;
     }

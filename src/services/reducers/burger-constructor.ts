@@ -20,7 +20,7 @@ export const burgerConstructorReducer = (state = initialState, action):  IBurger
     case DEL_INGREDIENT:
       return {...state, ingredients: state.ingredients.filter(item => item.uuid !== action.payload.uuid)}
     case CHANGE_ORDER:
-      return {...state, ingredients: [...state.ingredients.map(item => action.dragIndex === item.order ? {...item, order: action.hoverIndex} : action.hoverIndex === item.order ?  {...item, order: action.dragIndex} : item)]}
+      return {...state, ingredients: [...state.ingredients.map(item => action.dragIndex === item.order ? {...item, order: action.hoverIndex} : action.hoverIndex === item.order ?  {...item, order: action.dragIndex} : {...item})]}
     case SORT:
       return {...state, ingredients: [...state.ingredients.sort(action.sortingFunction)]}
     case CLEAR_INGREDIENTS:

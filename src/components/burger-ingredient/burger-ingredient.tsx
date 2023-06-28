@@ -33,7 +33,7 @@ const BurgerIngredient: FC<IBurgerIngredientsType> = ({ingredient}) => {
           </section>
         )}
         <section className={styles.content}>
-          <img alt='' className='mr-4 ml-4' src={ingredient.image}/>
+          <img alt='Картинка ингредиента' className='mr-4 ml-4' src={ingredient.image}/>
           <PriceIcon type='default' price={ingredient.price}/>
           <span className={styles.name + ' text text_type_main-default'}>{ingredient.name}</span>
         </section>

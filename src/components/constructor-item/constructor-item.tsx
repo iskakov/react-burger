@@ -34,7 +34,7 @@ const ConstructorItem: FC<IConstuctorItem> = ({ingredient}) => {
       dispatch({type: CHANGE_DRAG, uuid: item.id, isDrag: false})
     }
   });
-  const [, drop] = useDrop<IDragConstructoIngredients >({
+  const [, drop] = useDrop<IDragConstructoIngredients>({
     accept: "constructorIngredients",
 
     hover(item, monitor) {
@@ -50,7 +50,7 @@ const ConstructorItem: FC<IConstuctorItem> = ({ingredient}) => {
       const hoverMiddleY =
         (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
       const clientOffset = monitor.getClientOffset()
-      if (clientOffset && hoverIndex) {
+      if (clientOffset && !isNaN(hoverIndex)) {
         const hoverClientY = clientOffset.y - hoverBoundingRect.top
         if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
           return
