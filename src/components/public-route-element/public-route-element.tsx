@@ -14,7 +14,7 @@ const PublicRouteElement: FC<IPublicRouteElement> = ({element}) => {
   const {state} = useLocation()
 
   const init = () => {
-    dispatch(getUser() as any);
+    dispatch(getUser());
   }
   React.useEffect(() => {
     init();

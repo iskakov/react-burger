@@ -12,7 +12,7 @@ const BurgerIngredients: FC = () => {
   const dispatch = useAppDispatch();
   const {ingredients, ingredientsPreload, ingredientsError, errorMessage} = useAppSelector(getBurgerIngredients)
   React.useEffect(() => {
-    dispatch(getIngredients() as any)
+    dispatch(getIngredients())
   }, [dispatch]);
 
   const onChangeTab = (currTab: TYPE_OF_CATEGORY): void => {

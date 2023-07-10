@@ -14,6 +14,12 @@ import AppHeader from '../app-header/app-header';
 import IngredientPage from '../../pages/ingredient-page';
 import Profile from '../profile/profile';
 import ModalIngredient from '../modal-ingredient/modal-ingredient';
+import FeedPage from '../../pages/feed-page';
+import FeedsPage from '../../pages/feeds-page';
+import OrdersPage from '../../pages/orders-page';
+import OrderPage from '../../pages/order-page';
+import ModalFeed from '../modal-feed/modal-feed';
+import ModalOrder from '../modal-order/modal-order';
 
 const ListRoutes: FC = () => {
   const {state} = useLocation()
@@ -25,6 +31,9 @@ const ListRoutes: FC = () => {
         <Route path='/' element={<ConstructoPage />}> 
           {state && <Route path='ingredients/:id' element={<ModalIngredient />}/>}
         </Route>
+        <Route path='/feed' element={<FeedsPage />}> 
+          {state && <Route path='/feed/:id' element={<ModalFeed />}/>}
+        </Route>
         <Route path='/login' element={<PublicRouteElement element={<LoginPage />} />}/>
         <Route path='/logout' element={<LogoutPage />}/> 
         <Route path='/register' element={<PublicRouteElement element={<RegisterPage />} />}/>
@@ -32,8 +41,12 @@ const ListRoutes: FC = () => {
         <Route path='/forgot-password' element={<PublicRouteElement element={<ForgotPasswordPage />} />} />
         <Route path='/profile' element={<ProtectedRouteElement element={<ProfilePage />} /> }> 
           <Route index element={<Profile/>} />
+          <Route path='/profile/orders' element={<OrdersPage/>} />
+          {state && <Route path='/profile/orders/:id' element={<ModalOrder />}/>}
         </Route>
         {!state && <Route path='/ingredients/:id' element={<IngredientPage />}/>}
+        {!state && <Route path='/feed/:id' element={<FeedPage />}/>}
+        {!state && <Route path='/profile/orders/:id' element={<ProtectedRouteElement element={<OrderPage />} /> }/>}
         <Route path='/*' element={<NotFoundPage />}/>
       </Routes>
     </section>

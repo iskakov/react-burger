@@ -1,0 +1,12 @@
+.main {
+  width: 272px;
+  flex-direction: column;
+}
+.feedsNumber {
+  max-height: 321px;
+  max-width: 272px;
+  flex-direction: column;
+}
+.isReady {
+  color: #00CCCC
+}

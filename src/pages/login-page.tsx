@@ -13,7 +13,7 @@ const LoginPage: FC = () => {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
-    dispatch(login({email, password}) as any)
+    dispatch(login({email, password}))
   }
   return (
     <form className={styles.main} onSubmit={onSubmit}>

@@ -15,7 +15,7 @@ const ProtectedRouteElement: FC<IProtectedRouteElement> = ({element}) =>  {
 
   React.useEffect(() => {
     const init = () => {
-      dispatch(getUser() as any);
+      dispatch(getUser());
     }
     init();
   }, [])

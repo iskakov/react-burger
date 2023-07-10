@@ -1,5 +1,24 @@
-import { CLEAR_RESET, LOGIN_ERROR, LOGIN_LOAD, LOGIN_PRELOAD, LOGOUT_LOAD, MAIL_ERROR, MAIL_LOAD, MAIL_PRELOAD, REGISTER_ERROR, REGISTER_LOAD, REGISTER_PRELOAD, RESET_PASSWORD_ERROR, RESET_PASSWORD_LOAD, RESET_PASSWORD_PRELOAD, USER_ERROR, USER_LOAD, USER_PRELOAD, USER_UPDATE } from "../actions/user";
-const initialState = {
+import { IUser } from "../../utils/constants";
+import { TUserActions } from "../actions/user";
+import { CLEAR_RESET, LOGIN_ERROR, LOGIN_LOAD, LOGIN_PRELOAD, LOGOUT_LOAD, MAIL_ERROR, MAIL_LOAD, MAIL_PRELOAD, REGISTER_ERROR, REGISTER_LOAD, REGISTER_PRELOAD, RESET_PASSWORD_ERROR, RESET_PASSWORD_LOAD, RESET_PASSWORD_PRELOAD, USER_ERROR, USER_LOAD, USER_PRELOAD, USER_UPDATE } from "../constants/user";
+
+interface IUserType {
+  user: IUser;
+  mail: boolean;
+  password: boolean;
+  preload: boolean;
+  mailError: boolean;
+  passwordError: boolean;
+  loginError: boolean;
+  registerError: boolean;
+  refreshError: boolean;
+  resetError: boolean;
+  userError: boolean;
+  errorMessage: string;
+}
+
+
+const initialState: IUserType = {
   user: null,
   mail: false,
   password: false,
@@ -14,7 +33,7 @@ const initialState = {
   errorMessage: ''
 }
 
-export const userReducer = (state = initialState, action) => {
+export const userReducer = (state: IUserType = initialState, action: TUserActions) => {
   switch(action.type) {
     case MAIL_PRELOAD:
     case USER_PRELOAD:
