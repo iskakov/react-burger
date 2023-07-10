@@ -1,5 +1,14 @@
-import {  INGREDIENTS_PRELOAD, INGREDIENTS_LOAD, INGREDIENTS_ERROR, INGREDIENTS_INC_COUNTER, INGREDIENTS_DEC_COUNTER, CLEAR_COUNTERS} from "../actions/burger-ingredients"; 
-const initialState = {
+import { IBurgerType } from "../../utils/constants";
+import { TBurgerIngredientsActions } from "../actions/burger-ingredients";
+import {  INGREDIENTS_PRELOAD, INGREDIENTS_LOAD, INGREDIENTS_ERROR, INGREDIENTS_INC_COUNTER, INGREDIENTS_DEC_COUNTER, CLEAR_COUNTERS} from "../constants/burger-ingredients"; 
+
+interface IBurgerIngredientsType {
+  ingredients: Array<IBurgerType>;
+  ingredientsPreload: boolean;
+  ingredientsError: boolean;
+  errorMessage: string;
+}
+const initialState: IBurgerIngredientsType = {
   ingredients: [],
   ingredientsPreload: false,
   ingredientsError: false,
@@ -7,7 +16,7 @@ const initialState = {
 }
 
 
-export const burgerIngredientsReducer = (state = initialState, action) => {
+export const burgerIngredientsReducer = (state: IBurgerIngredientsType = initialState, action: TBurgerIngredientsActions):  IBurgerIngredientsType => {
   switch(action.type) {
     case INGREDIENTS_PRELOAD: 
       return {...state, ingredientsPreload: true}

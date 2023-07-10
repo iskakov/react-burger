@@ -24,14 +24,14 @@ const BurgerConstructor: FC = () => {
   const [, dropTarget] = useDrop<IBurgerIngredientsType>({
     accept: "ingredients",
     drop(item) {
-      dispatch(addIngredient(item.ingredient, uuidv4()) as any)
+      dispatch(addIngredient(item.ingredient, uuidv4()))
     },
   });
   const navigate = useNavigate()
   const submit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if (getCookie('accessToken')) {
-      dispatch(pushOrder({ingredients: [ bun['_id'], ...ingredients.map(item => item['_id'])]}) as any)
+      dispatch(pushOrder({ingredients: [ bun['_id'], ...ingredients.map(item => item['_id'])]}))
       setVisibleOrder(true);
     } else {
       navigate('/login')

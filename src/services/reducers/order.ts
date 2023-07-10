@@ -1,12 +1,21 @@
-import {  ORDER_PRELOAD, ORDER_LOAD, ORDER_ERROR} from "../actions/order";
-const initialState = {
+import { IOrderBody } from "../../utils/constants";
+import { TOrderActions } from "../actions/order";
+import {  ORDER_PRELOAD, ORDER_LOAD, ORDER_ERROR} from "../constants/order";
+interface IOrderType {
+  order: IOrderBody;
+  orderPreload: boolean;
+  orderError: boolean;
+  errorMessage: string;
+}
+
+const initialState: IOrderType = {
   order: null,
   orderPreload: false,
   orderError: false,
   errorMessage: ''
 }
 
-export const orderReducer = (state = initialState, action) => {
+export const orderReducer = (state: IOrderType = initialState, action: TOrderActions): IOrderType => {
   switch(action.type) {
     case ORDER_PRELOAD: 
       return {...state, orderPreload: true}

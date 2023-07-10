@@ -17,7 +17,7 @@ const RegisterPage: FC = () => {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
-    dispatch(register({name, email, password}) as any)
+    dispatch(register({name, email, password}))
   }
 
   React.useEffect(() => {

@@ -19,6 +19,10 @@ const RESET_PASSWORD_URL = MAIL_URL + '/reset';
 const ORDER_URL = `${BASE_URL}/orders`;
 const USER_URL = `${BASE_URL}/auth/user`;
 
+const WS_BASE_URL = 'wss://norma.nomoreparties.space'
+const FEEDS_URL = `${WS_BASE_URL}/orders/all`
+const ORDERS_URL = `${WS_BASE_URL}/orders`
+
 type categries = TYPE_OF_CATEGORY.bun | TYPE_OF_CATEGORY.sauce | TYPE_OF_CATEGORY.main
 
 export type TCategroies = {
@@ -40,6 +44,23 @@ export interface IBurgerType {
   image_large: Readonly<string>;
   count?: number;
 };
+
+export type TAction<TTypeAction, TTypePayload={}>= {
+  readonly type: TTypeAction,
+  readonly payload?: TTypePayload
+}
+
+export interface IFeed<TTypeIngredients> {
+  '_id': string,
+  ingredients: TTypeIngredients,
+  status: string;
+  number: number;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type IFeedApi = IFeed<Array<string>>;
 
 export interface IBurgerTypeConstructor extends IBurgerType {
   order?: number;
@@ -73,12 +94,6 @@ export interface IOrderBody {
   '_id': string
 }
 
-export interface IOrder {
-  name: string,
-  order: IOrderBody,
-  id: string
-}
-
 
 export interface IToken {
   token: string
@@ -93,6 +108,20 @@ export type TResponseBody<TDataKey extends string = '', TDataType  = {}> = {
 } & {
   accessToken: string;
   refreshToken: string
+} & {
+  total?: number;
+  totalToday?: number;
+};
+
+export type TWSResponseBody<TDataKey extends string = '', TDataType = {}> = {
+  [fw in TDataKey]?: TDataType;
+} & {
+  success: boolean;
+  message?: string;
+  headers?: Headers;
+} & {
+  total?: number;
+  totalToday?: number;
 };
 
 const MAIN_ROUTE = '/';
@@ -136,8 +165,36 @@ function bubleSort(first: IBurgerTypeConstructor, second: IBurgerTypeConstructor
   return 0;
 }
 
+
+export function parseDate(date: string): string {
+  let newDate = '';
+  const currentDate = new Date();
+  const parsedDate = new Date(date);
+  const Difference_In_Time = currentDate.getTime() - parsedDate.getTime();
+  const Difference_In_Days = Number.parseInt(Difference_In_Time / (1000 * 3600 * 24) + '');
+  switch(Difference_In_Days) {
+    case 0:
+      newDate += 'Сегодня, ';
+      break;
+    case 1:
+      newDate += 'Вчера, ';
+      break;
+    case 2:
+    case 3:
+    case 4: 
+      newDate += Difference_In_Days + ' дня назад, ';
+      break;
+    default: 
+      newDate += Difference_In_Days + ' дней назад, ';
+      break;
+  }
+  newDate += parsedDate.getHours() + ':' + parsedDate.getMinutes();
+  return newDate;
+}
 export {
   TYPE_OF_CATEGORY,
+  FEEDS_URL,
+  ORDERS_URL,
   CATEGORY_ON_RUSSIAN,
   INGREDIENTS_URL,
   LOGIN_URL,

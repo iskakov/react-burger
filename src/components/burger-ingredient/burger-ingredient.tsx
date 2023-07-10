@@ -2,7 +2,7 @@ import styles from './burger-ingredient.module.css';
 import PriceIcon from '../price-icon/price-icon';
 import React, { FC } from 'react';
 import { useDispatch} from 'react-redux';
-import { SELECT_INGREDIENT } from '../../services/actions/burger-ingredient';
+import { selectIngredientAction } from '../../services/actions/burger-ingredient';
 import { useDrag } from "react-dnd";
 import { IBurgerType } from '../../utils/constants';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -19,7 +19,7 @@ const BurgerIngredient: FC<IBurgerIngredientsType> = ({ingredient}) => {
   });
 
   const showIngredientInfo = (): void => {
-    dispatch({type: SELECT_INGREDIENT, payload: ingredient})
+    dispatch(selectIngredientAction(ingredient))
     navigate('/ingredients/' + ingredient['_id'], { replace:true, state: {from: location} })
   }
   return (

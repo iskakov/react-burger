@@ -13,7 +13,7 @@ const IngredientDetails: FC = () => {
 
   React.useEffect(() => {
     const init = () => {
-      dispatch(getIngredient(id) as any)
+      dispatch(getIngredient(id))
     }
     init();
   }, [])

@@ -1,0 +1,26 @@
+.main {
+  width: 100%;
+  min-height: 214px;
+  flex-direction: row;
+  border-radius: 40px;
+  background-color: #1C1C21;
+}
+.statusDone {
+  color: #00CCCC;
+}
+.statusCanceled {
+  color: red;
+}
+.name {
+  width: 100%;
+}
+.header {
+  width: 100%;
+  justify-content: space-between;
+}
+
+.ingredients {
+  width: 100%;
+
+  justify-content: space-between;
+}

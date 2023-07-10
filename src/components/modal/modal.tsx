@@ -1,14 +1,14 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC, HTMLAttributes, ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import ModalOverlay from '../modal-overvlay/modal-overlay';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './modal.module.css';
 
-interface IModal {
+interface IModal extends HTMLAttributes<HTMLDivElement>{
   header?: Readonly<string>;
   onClose: () => void;
   children?: ReactNode;
-}
+} 
 
 const modalRoot = document.getElementById('react-modals');
 const Modal: FC<IModal> = ({onClose, header, children}) => {

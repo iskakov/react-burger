@@ -10,7 +10,7 @@ const AppHeader: FC = () => {
       <nav className={headerStyles.main}>
         <div className={headerStyles.item}>
           <NavLink icon='burger' text='Конструктор' link='/'/>
-          <NavLink icon='list' text='Лента заказов' link='/orders'/>
+          <NavLink icon='list' text='Лента заказов' link='/feed'/>
         </div>
         <Logo />
         <NavLink text='Личный кабинет' link='/profile'/>
