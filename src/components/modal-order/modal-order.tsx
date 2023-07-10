@@ -12,11 +12,13 @@ const ModalOrder: FC = () => {
   const {orders} = useAppSelector(getOrders)
   const {id} = useParams();
 
+
   useEffect(() => {
     if (orders.length > 0 ) {
       dispatch(selectFeedAction(orders.find(item => item['_id'] === id)));
     }
   }, [orders])
+
 
   const onClose = (): void => {
     dispatch(clearFeedAction())

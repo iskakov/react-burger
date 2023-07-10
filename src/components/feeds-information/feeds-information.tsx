@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useEffect, useMemo, useState } from 'react'
 import styles from './feeds-information.module.css'
 import FeedsInformationBlock from '../feeds-information-block/feeds-information-block'
 import { IFeedApi } from '../../utils/constants'
@@ -10,17 +10,9 @@ type TFeedsInformation = {
 }
 
 const FeedsInformation: FC<TFeedsInformation> = ({feeds, totalToday, total}) => {
-
-  const [readyFeedsNumber, setReadyFeedsNumber] = useState<Array<number>>([])
-  const [inWorkFeedsNumber, setInWorkFeedsNumber] = useState<Array<number>>([])
-
-  useEffect(() => {
-    if (feeds.length > 0) {
-      setReadyFeedsNumber(feeds.filter(item => item.status === 'done').map(item => item.number))
-      setInWorkFeedsNumber(feeds.filter(item => item.status === 'pending').map(item => item.number))
-    }
+  const [readyFeedsNumber, inWorkFeedsNumber] = useMemo(() => {
+    return [feeds.filter(item => item.status === 'done').map(item => item.number), feeds.filter(item => item.status === 'pending').map(item => item.number)]
   }, [feeds])
-
 
   return (
     <section className={styles.main}>

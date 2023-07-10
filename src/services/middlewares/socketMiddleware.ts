@@ -5,18 +5,19 @@ import { getCookie } from '../../utils/cookie'
 export const socketMiddleware = (wsUrl: string, wsActions: TWSAppActions, wsActionTypes: TWSAppActionTypes, isSecure?: boolean): Middleware => {
   return ((store: MiddlewareAPI<AppDispatch, RootState>) => {
     let socket: WebSocket | null = null;
-
+    let socketIsOpen: boolean = false;
     return next => (action: TApplicationActions) => {
       const { dispatch, getState } = store;
       const { type } = action;
       const {onOpen, onClose, onError, onMessage} = wsActions;
-      const {wsInitType} = wsActionTypes;
+      const {wsInitType, wsClose} = wsActionTypes;
       let user = null;
       if (isSecure) {
         user = getState().user.user;
       }
-      if (type === wsInitType) {
+      if (type === wsInitType && !socketIsOpen) {
         socket = new WebSocket(`${wsUrl + (user ? `?token=${getCookie('accessToken').split(' ')[1]}` : '')}`);
+        socketIsOpen = true;
       }
       if (socket) {
         socket.onopen = () => {
@@ -35,9 +36,16 @@ export const socketMiddleware = (wsUrl: string, wsActions: TWSAppActions, wsActi
         };
 
         socket.onclose = event => {
-          dispatch(onClose());
+          if (!socketIsOpen) {
+            dispatch(onClose());
+          }
         };
+        if (type === wsClose) {
+          socketIsOpen = false;
+          socket.close();
+        }
       }
+
 
       next(action);
     };

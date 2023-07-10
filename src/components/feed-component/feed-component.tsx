@@ -16,7 +16,7 @@ interface IFeedComponent {
 
 const FeedComponent: FC<IFeedComponent> =  ({feed, isOrders}) => {
   const [currIngrdients, setCurrIngredients] = useState<Array<IBurgerType>>([]);
-  const [summ, setSumm] = useState<number>(0);
+  const [sum, setSum] = useState<number>(0);
   const [status, setStatus] = useState<string>('');
 
   const {ingredients} = useAppSelector(getBurgerIngredients);
@@ -27,7 +27,7 @@ const FeedComponent: FC<IFeedComponent> =  ({feed, isOrders}) => {
     if (ingredients.length > 0) {
       const localIngredients = feed.ingredients.map(id => ingredients.find(item => item['_id'] === id));
       setCurrIngredients(localIngredients);
-      setSumm(localIngredients.reduce((accum, item) => {
+      setSum(localIngredients.reduce((accum, item) => {
         accum += item.price;
         if (item.type === 'bun') {
           accum += item.price;
@@ -57,7 +57,7 @@ const FeedComponent: FC<IFeedComponent> =  ({feed, isOrders}) => {
   }, [feed])
   const showFeedInfo = (): void => {
     dispatch(selectFeedAction(feed))
-    navigate((isOrders ? '/profile/orders/' :'/feed/') + feed['_id'], { replace:true, state: {from: location} })
+    navigate((isOrders ? '/profile/orders/' :'/feed/') + feed['_id'], { replace:true, state: {from: {...location, pathname:(isOrders ? '/profile/orders/' :'/feed/') + feed['_id'] }} })
   }
   return (
     <section className={styles.main + ' mb-4 p-6 mr-2'} onClick={showFeedInfo}>
@@ -71,7 +71,7 @@ const FeedComponent: FC<IFeedComponent> =  ({feed, isOrders}) => {
       )}
       <section className={styles.ingredients}>
         <FeedIngredients ingredients={currIngrdients}/>
-        <PriceIcon type='default' price={summ}/>
+        <PriceIcon type='default' price={sum}/>
       </section>
     </section>
   )

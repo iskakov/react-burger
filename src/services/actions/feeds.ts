@@ -25,4 +25,6 @@ export type TWSFeedsActions = {
 
 export type TWSFeedsActionTypes = {
   wsInitType: typeof FEEDS_ON_INIT;
+  wsClose: typeof FEEDS_ON_CLOSE
+
 }

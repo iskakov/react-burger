@@ -25,4 +25,6 @@ export type TWSOrdersActions = {
 
 export type TWSOrdersActionTypes = {
   wsInitType: typeof ORDERS_ON_INIT;
+  wsClose: typeof ORDERS_ON_CLOSE
+
 }

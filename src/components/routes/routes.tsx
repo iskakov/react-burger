@@ -24,7 +24,6 @@ import ModalOrder from '../modal-order/modal-order';
 const ListRoutes: FC = () => {
   const {state} = useLocation()
   return (
-
     <section>
       <AppHeader/>
       <Routes>
@@ -42,11 +41,11 @@ const ListRoutes: FC = () => {
         <Route path='/profile' element={<ProtectedRouteElement element={<ProfilePage />} /> }> 
           <Route index element={<Profile/>} />
           <Route path='/profile/orders' element={<OrdersPage/>} />
-          {state && <Route path='/profile/orders/:id' element={<ModalOrder />}/>}
+          {(state && state.from) && <Route path='/profile/orders/:id' element={<OrdersPage isModal={true} />}/>}
         </Route>
-        {!state && <Route path='/ingredients/:id' element={<IngredientPage />}/>}
+        {!state&& <Route path='/ingredients/:id' element={<IngredientPage />}/>}
         {!state && <Route path='/feed/:id' element={<FeedPage />}/>}
-        {!state && <Route path='/profile/orders/:id' element={<ProtectedRouteElement element={<OrderPage />} /> }/>}
+        {(!state || state?.fromProtected) && <Route path='/profile/orders/:id' element={<ProtectedRouteElement element={<OrderPage />} /> }/>}
         <Route path='/*' element={<NotFoundPage />}/>
       </Routes>
     </section>

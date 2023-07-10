@@ -8,12 +8,12 @@ import { TBurgerIngredientsActions } from './actions/burger-ingredients';
 import { TOrderActions } from './actions/order';
 import { TUserActions } from './actions/user';
 import { TFeedsActions, TWSFeedsActionTypes, TWSFeedsActions, feedsOnCloseAction, feedsOnErrorAction, feedsOnMessageAction, feedsOnOpenAction } from './actions/feeds';
-import { FEEDS_ON_INIT } from './constants/feeds';
+import { FEEDS_ON_CLOSE, FEEDS_ON_INIT } from './constants/feeds';
 import { FEEDS_URL, IFeedApi, ORDERS_URL, TWSResponseBody } from '../utils/constants';
 import { socketMiddleware } from './middlewares/socketMiddleware';
 import { TFeedActions } from './actions/feed';
 import { TOrdersActions, TWSOrdersActionTypes, TWSOrdersActions, ordersOnCloseAction, ordersOnErrorAction, ordersOnMessageAction, ordersOnOpenAction } from './actions/orders';
-import { ORDERS_ON_INIT } from './constants/orders';
+import { ORDERS_ON_CLOSE, ORDERS_ON_INIT } from './constants/orders';
 
 const composeEnhancers = window['__REDUX_DEVTOOLS_EXTENSION_COMPOSE__'] as typeof compose || compose;
 const wSFeedActions: TWSFeedsActions = {
@@ -24,7 +24,8 @@ const wSFeedActions: TWSFeedsActions = {
 }
 
 const wsFeedActionTypes: TWSFeedsActionTypes = {
-  wsInitType: FEEDS_ON_INIT
+  wsInitType: FEEDS_ON_INIT,
+  wsClose: FEEDS_ON_CLOSE
 }
 
 const wSOrdersActions: TWSOrdersActions = {
@@ -35,7 +36,8 @@ const wSOrdersActions: TWSOrdersActions = {
 }
 
 const wsOrdersctionTypes: TWSOrdersActionTypes = {
-  wsInitType: ORDERS_ON_INIT
+  wsInitType: ORDERS_ON_INIT,
+  wsClose: ORDERS_ON_CLOSE
 }
 export type TWSFeedAndOrdersResponce = TWSResponseBody<'orders', Array<IFeedApi>>;
 export type TWSAppActions = TWSFeedsActions | TWSOrdersActions;

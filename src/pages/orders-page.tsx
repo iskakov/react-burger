@@ -6,7 +6,11 @@ import { useAppDispatch, useAppSelector } from '../utils/hooks'
 import { getIngredients } from '../services/actions/burger-ingredients'
 import { ordersOnCloseAction, ordersOnInitAction } from '../services/actions/orders'
 
-const OrdersPage: FC = () => {
+type TOrderPage = {
+  isModal?: boolean;
+}
+
+const OrdersPage: FC<TOrderPage> = ({isModal}) => {
   const {ingredients} = useAppSelector(getBurgerIngredients)
   const {orders} = useAppSelector(getOrders)
   const dispatch = useAppDispatch();
@@ -21,7 +25,7 @@ const OrdersPage: FC = () => {
     }
   },[]);
   return (
-    <Feeds feeds={orders} isOrders={true}/>
+    <Feeds feeds={orders} isOrders={true} isModal={isModal}/>
   )
 }
 
