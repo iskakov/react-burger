@@ -1,8 +1,10 @@
 .modal {
-  min-width: 720px;
+  min-width: 600px;
   background: #1C1C21;
   flex-direction: column;
   border-radius: 40px;
+  z-index: 999;
+
 }
 
 .header {

@@ -10,8 +10,8 @@ const ProfilePage: FC = () => {
       <section className={styles.content}>
         <section className={styles.links + ' mr-10'}>
           <section className={styles.topContent}>
-            <Link to='/profile' className={styles.link + (pathname === 'profile'  ? ' text_color_inactive' : ' text_color_primary') + ' text text_type_main-medium'}>Профиль</Link>
-            <Link to='/profile' className={styles.link + (pathname !== 'profile'  ? ' text_color_inactive' : ' text_color_primary') + ' text text_type_main-medium '}>История заказов</Link>
+            <Link to='/profile' className={styles.link + (pathname === '/profile'  ? ' text_color_primary' : ' text_color_inactive') + ' text text_type_main-medium'}>Профиль</Link>
+            <Link to='/profile/orders' className={styles.link + (pathname.includes('/profile/orders')  ? ' text_color_primary' : ' text_color_inactive') + ' text text_type_main-medium '}>История заказов</Link>
             <Link to='/logout' className={styles.link + ' text text_type_main-medium text_color_inactive'}>Выход</Link>
           </section>
           <section className={styles.description}>

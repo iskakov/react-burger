@@ -16,7 +16,7 @@ const Profile: FC = () => {
     setReadonly(!readonly)
   }
   const save = (): void => {
-    dispatch(updateUser({name, email: login, password}) as any)
+    dispatch(updateUser({name, email: login, password}))
     setReadonly(!readonly)
     setPassword('')
 
@@ -29,7 +29,7 @@ const Profile: FC = () => {
   }
   React.useEffect(()=> {
     const init = (): void => {
-      dispatch(getUser() as any)
+      dispatch(getUser())
     }
     init()
   }, [])

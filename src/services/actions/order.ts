@@ -1,24 +1,33 @@
 import { newOrder } from "../../utils/api"
-import { CLEAR_INGREDIENTS } from "./burger-constructor"
-import { CLEAR_COUNTERS } from "./burger-ingredients"
+import { IOrderBody, TAction } from "../../utils/constants";
+import { ORDER_ERROR, ORDER_LOAD, ORDER_PRELOAD } from "../constants/order"
+import { AppDispatch, AppThunkAction } from "../store";
+import { clearIngredientsAction } from "./burger-constructor";
+import { clearCountersAction } from "./burger-ingredients";
 
-export const ORDER_PRELOAD = 'ORDER_PRELOAD'
-export const ORDER_LOAD = 'ORDER_LOAD'
-export const ORDER_ERROR = 'ORDER_ERROR'
+export type TOrderLoadAction = TAction<typeof ORDER_LOAD, IOrderBody>;
+export type TOrderPreloadAction = TAction<typeof ORDER_PRELOAD>;
+export type TOrderErrorAction = TAction<typeof ORDER_ERROR, string>;
 
-export const pushOrder = (ingredientIds) => {
-  return function(dispatch) {
-    dispatch({type: ORDER_PRELOAD})
+export type TOrderActions = TOrderLoadAction | TOrderPreloadAction | TOrderErrorAction;
+
+export const orderLoadAction = (order: IOrderBody): TOrderLoadAction => ({type: ORDER_LOAD, payload: order});
+export const orderPreloadAction = (): TOrderPreloadAction => ({type: ORDER_PRELOAD});
+export const orderErrorAction = (message: string): TOrderErrorAction => ({type: ORDER_ERROR, payload: message});
+
+export const pushOrder = (ingredientIds): AppThunkAction => {
+  return function(dispatch: AppDispatch) {
+    dispatch(orderPreloadAction())
     newOrder(ingredientIds).then(res => {
       if (res && res.success) {
-        dispatch({type: ORDER_LOAD, payload: res})
-        dispatch({type: CLEAR_INGREDIENTS})
-        dispatch({type: CLEAR_COUNTERS})
+        dispatch(orderLoadAction(res.order))
+        dispatch(clearIngredientsAction())
+        dispatch(clearCountersAction())
       } else {
-        dispatch({type: ORDER_ERROR, payload: res.message})
+        dispatch(orderErrorAction(res.message))
       }
     }).catch((res) => {
-      dispatch({type: ORDER_ERROR, payload: res.message})
+      dispatch(orderErrorAction(res.message))
     });
   }
 }

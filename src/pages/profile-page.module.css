@@ -1,8 +1,7 @@
 .main {
   width: 100%;
   flex-direction: row;
-  justify-content: center;
-  margin-top: 120px;
+  justify-content: center
 }
 .content {
   width: 1280px;
@@ -26,12 +25,15 @@
 .links {
   flex-direction: column;
   width: 320px;
+  margin-top: 120px;
+
 }
 .topContent {
   flex-direction: column;
   margin-bottom: 80px;
 }
 .mainContent {
+  width: 900px;
   flex-direction: column;
 }
 .buttons {

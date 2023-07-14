@@ -15,11 +15,11 @@ const ProtectedRouteElement: FC<IProtectedRouteElement> = ({element}) =>  {
 
   React.useEffect(() => {
     const init = () => {
-      dispatch(getUser() as any);
+      dispatch(getUser());
     }
     init();
   }, [])
-  return user ? element : <Navigate to='/login' state={{from: location}} replace/>
+  return user ? element : <Navigate to='/login' state={location.state ? location.state : {fromProtected: location}} replace/>
 }
 
 export default ProtectedRouteElement;

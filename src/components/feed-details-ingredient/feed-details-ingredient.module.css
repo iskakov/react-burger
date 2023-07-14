@@ -1,0 +1,35 @@
+.ingredient {
+  background: linear-gradient(#131316, #131316) padding-box,
+              linear-gradient(to right, #801AB2, #4C4CFF) border-box;
+  border-radius: 50em;
+  border: 2px solid transparent;
+}
+.ingredient {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 64px;
+  height: 64px;
+}
+.img {
+  position: relative;
+  transform: scale(0.7);
+}
+.main {
+  flex-direction: row;
+  min-height: 64px;
+  width: 100%;
+
+  align-items: center;
+
+}
+.name {
+  flex-grow: 1;
+}
+
+.totalPrice {
+  flex-direction: row;
+  align-items: center;
+}
+

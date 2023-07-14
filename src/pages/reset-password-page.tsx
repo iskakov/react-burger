@@ -16,7 +16,7 @@ const ResetPasswordPage: FC = () => {
   const [password, setPassword] = React.useState<string>('')
   const onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
-    dispatch(changePassword({token: code, password}) as any)
+    dispatch(changePassword({token: code, password}))
   }
   React.useEffect(() => {
     if (!state) {

@@ -1,10 +1,9 @@
-import React, { Dispatch, FC } from 'react'
+import React, { FC } from 'react'
 import styles from './constructor-item.module.css'
 import { IBurgerTypeConstructor, TYPE_OF_CATEGORY } from '../../utils/constants'
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDrag, useDrop } from "react-dnd";
-import { delIngredient, sortingIngredients } from '../../services/actions/burger-constructor';
-import { CHANGE_DRAG } from '../../services/actions/burger-constructor';
+import { changeDragAction, delIngredient, sortingIngredients } from '../../services/actions/burger-constructor';
 import { useAppDispatch } from '../../utils/hooks';
 interface IConstuctorItem {
   ingredient: IBurgerTypeConstructor
@@ -21,7 +20,7 @@ const ConstructorItem: FC<IConstuctorItem> = ({ingredient}) => {
   const dispatch = useAppDispatch();
 
   const delIngredientAction = (): void => {
-    dispatch(delIngredient(ingredient) as any)
+    dispatch(delIngredient(ingredient))
   }
   const ref = React.useRef<HTMLDivElement>(null)
   const [{ isDrag }, drag] = useDrag<IDragConstructoIngredients, unknown, IDragObject>({
@@ -31,7 +30,7 @@ const ConstructorItem: FC<IConstuctorItem> = ({ingredient}) => {
       isDrag: monitor.isDragging()
     }),
     end: (item) => {
-      dispatch({type: CHANGE_DRAG, uuid: item.id, isDrag: false})
+      dispatch(changeDragAction(false, item.id))
     }
   });
   const [, drop] = useDrop<IDragConstructoIngredients>({
@@ -66,12 +65,12 @@ const ConstructorItem: FC<IConstuctorItem> = ({ingredient}) => {
   })
   React.useEffect(() => {
     if (!ingredient.isDrag && isDrag) {
-      dispatch({type: CHANGE_DRAG, uuid: ingredient.uuid, isDrag})
+      dispatch(changeDragAction(false, ingredient.uuid))
     }
   }, [isDrag, dispatch, ingredient.isDrag, ingredient.uuid])
   drag(drop(ref))
   const chageOrder = React.useCallback((dragIndex,hoverIndex) => {
-    dispatch(sortingIngredients(dragIndex, hoverIndex) as any)
+    dispatch(sortingIngredients(dragIndex, hoverIndex))
   }, [dispatch]) 
 
   return (

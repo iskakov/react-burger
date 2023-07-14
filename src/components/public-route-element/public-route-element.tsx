@@ -11,15 +11,15 @@ interface IPublicRouteElement {
 const PublicRouteElement: FC<IPublicRouteElement> = ({element}) => {
   const {user} = useAppSelector(getUserStore)
   const dispatch = useAppDispatch();
-  const {state} = useLocation()
+  const location = useLocation()
 
   const init = () => {
-    dispatch(getUser() as any);
+    dispatch(getUser());
   }
   React.useEffect(() => {
     init();
   }, [])
-  return !user ? element : <Navigate to={state ? state.from.pathname : '/'} replace/>
+  return !user ? element : <Navigate to={location.state ? (location.state.fromProtected ? location.state.fromProtected : location.state.from)?.pathname : '/'}  state={location.state ? location.state : {fromPublic: location}} replace/>
 }
 
 export default PublicRouteElement;

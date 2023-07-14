@@ -1,8 +1,8 @@
-import { IBurgerType, ICheckEmail, INGREDIENTS_URL, IOrder, IResetPassword, IToken, IUser, LOGIN_URL, LOGOUT_URL, MAIL_URL, ORDER_URL, REFRESH_TOKEN_URL, REGISTER_URL, RESET_PASSWORD_URL, TResponseBody, USER_URL,  } from "./constants";
+import { IBurgerType, ICheckEmail, INGREDIENTS_URL, IOrderBody, IResetPassword, IToken, IUser, LOGIN_URL, LOGOUT_URL, MAIL_URL, ORDER_URL, REFRESH_TOKEN_URL, REGISTER_URL, RESET_PASSWORD_URL, TResponseBody, USER_URL,  } from "./constants";
 import { getCookie } from "./cookie";
 type TBurger = Promise<TResponseBody<'data', Array<IBurgerType>>> ;
-type TOrder = Promise<TResponseBody<'order', IOrder>> ;
-type TUser = Promise<TResponseBody<'user', IUser>> ;
+type TOrder = Promise<TResponseBody<'order', IOrderBody>> ;
+type TUser = Promise<TResponseBody<'user', IUser>>;
 type TResponse = TBurger | TOrder | TUser;
 type TBody = Promise<TResponseBody>;
 const checkResponse = (res: Response): TResponse  => {
@@ -21,7 +21,7 @@ const getIngredientsAPI = (): TBurger => {
   })
 }
 
-const newOrder = (ingredients: Array<string>): Promise<TResponseBody<'order', IOrder>>  => {
+const newOrder = (ingredients: Array<string>): Promise<TResponseBody<'order', IOrderBody>>  => {
   return request(ORDER_URL, {
     method: 'POST',
     body: JSON.stringify(ingredients),
@@ -114,7 +114,6 @@ const checkMailAPI = (data: ICheckEmail): TBody => {
     }
   })
 }
-
 
 export {
   getIngredientsAPI,
