@@ -8,7 +8,7 @@ interface IOrderType {
   errorMessage: string;
 }
 
-const initialState: IOrderType = {
+export const initialState: IOrderType = {
   order: null,
   orderPreload: false,
   orderError: false,

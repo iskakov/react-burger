@@ -1,24 +1,11 @@
 import { UserObject } from '../../utils/constants-test';
 import { loginErrorAction, loginLoadAction, loginPreloadAction, logoutLoadAction, mailErrorAction, mailLoadAction, mailPreloadAction, registerErrorAction, registerLoadAction, registerPreloadAction, resetPasswordErrorAction, resetPasswordLoadAction, resetPasswordPreloadAction, userErrorAction, userLoadAction, userPreloadAction, userUpdateAction } from '../actions/user';
-import { userReducer } from './user';
-
-const initialState = {
-  user: null,
-  mail: false,
-  password: false,
-  preload: false,
-  mailError: false,
-  loginError: false,
-  registerError: false,
-  resetError: false,
-  userError: false,
-  errorMessage: '' 
-}
+import { userReducer, initialState } from './user';
 
 describe('order reducer', () => {
   it('should return the initial state', () => {
     expect(userReducer(undefined, {})).toEqual(
-      initialState
+      {...initialState}
     )
   })
 
@@ -136,7 +123,7 @@ describe('order reducer', () => {
   })
 
   it('check result action user load', () => {
-    expect(userReducer(initialState, userLoadAction(UserObject))).toEqual(
+    expect(userReducer({...initialState}, userLoadAction(UserObject))).toEqual(
       {
         ...initialState,
         user: UserObject
@@ -145,7 +132,7 @@ describe('order reducer', () => {
   })
 
   it('check result action register load', () => {
-    expect(userReducer(initialState, registerLoadAction(UserObject))).toEqual(
+    expect(userReducer({...initialState}, registerLoadAction(UserObject))).toEqual(
       {
         ...initialState,
         user: UserObject
@@ -154,7 +141,7 @@ describe('order reducer', () => {
   })
 
   it('check result action login load', () => {
-    expect(userReducer(initialState, loginLoadAction(UserObject))).toEqual(
+    expect(userReducer({...initialState}, loginLoadAction(UserObject))).toEqual(
       {
         ...initialState,
         user: UserObject
@@ -172,7 +159,7 @@ describe('order reducer', () => {
   })
 
   it('check result action mail load', () => {
-    expect(userReducer(initialState, mailLoadAction())).toEqual(
+    expect(userReducer({...initialState}, mailLoadAction())).toEqual(
       {
         ...initialState,
         mail: true
@@ -181,7 +168,7 @@ describe('order reducer', () => {
   })
 
   it('check result action reset password load', () => {
-    expect(userReducer(initialState, resetPasswordLoadAction())).toEqual(
+    expect(userReducer({...initialState}, resetPasswordLoadAction())).toEqual(
       {
         ...initialState,
         password: true

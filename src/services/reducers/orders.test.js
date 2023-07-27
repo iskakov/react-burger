@@ -1,20 +1,11 @@
 import { FeedObject } from '../../utils/constants-test';
 import { ordersOnCloseAction, ordersOnErrorAction, ordersOnMessageAction, ordersOnOpenAction } from '../actions/orders';
-import { ordersReducer } from './orders';
-
-const initialState = {
-  orders: [],
-  total: 0,
-  totalToday: 0,
-  isOpen: false,
-  error: false,
-  errorMessage: ''
-};
+import { ordersReducer, initialState } from './orders';
 
 describe('orders reducer', () => {
   it('should return the initial state', () => {
     expect(ordersReducer(undefined, {})).toEqual(
-      initialState
+      {...initialState}
     )
   })
 
@@ -47,7 +38,7 @@ describe('orders reducer', () => {
   })
 
   it('check result action ingredient load', () => {
-    expect(ordersReducer(initialState, ordersOnMessageAction({orders: [FeedObject], total: 200, totalToday: 5000}))).toEqual(
+    expect(ordersReducer({...initialState}, ordersOnMessageAction({orders: [FeedObject], total: 200, totalToday: 5000}))).toEqual(
       {
         ...initialState,
         orders: [FeedObject],

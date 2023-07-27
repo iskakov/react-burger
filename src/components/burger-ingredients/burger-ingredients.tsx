@@ -3,19 +3,12 @@ import styles from './burger-ingredients.module.css'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import ListIngredient from '../list-ingredient/list-ingredient'
 import { TCategroies, TYPE_OF_CATEGORY } from '../../utils/constants';
-import { getIngredients } from '../../services/actions/burger-ingredients';
 import { getBurgerIngredients } from '../../services/store';
-import { useAppDispatch, useAppSelector } from '../../utils/hooks';
+import { useAppSelector } from '../../utils/hooks';
 
 const BurgerIngredients: FC = () => {
   const [currentTab, setCurrentTab] = React.useState<TYPE_OF_CATEGORY>(TYPE_OF_CATEGORY.bun)
-  const dispatch = useAppDispatch();
   const {ingredients, ingredientsPreload, ingredientsError, errorMessage} = useAppSelector(getBurgerIngredients)
-  React.useEffect(() => {
-    if (ingredients.length === 0) {
-      dispatch(getIngredients())
-    }
-  }, [ingredients,dispatch]);
 
   const onChangeTab = (currTab: TYPE_OF_CATEGORY): void => {
     document.getElementById(currTab)?.scrollIntoView();

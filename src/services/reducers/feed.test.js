@@ -1,15 +1,11 @@
-import { FeedObject } from '../../utils/constants-test';
+import { FeedObject} from '../../utils/constants-test';
 import { clearFeedAction, selectFeedAction } from '../actions/feed';
-import { feedReducer } from './feed';
-
-const initialState = {
-  feed: null
-};
+import { feedReducer, initialState } from './feed';
 
 describe('burger-ingredient reducer', () => {
   it('should return the initial state', () => {
     expect(feedReducer(undefined, {})).toEqual(
-      initialState
+      {...initialState}
     )
   })
 
@@ -17,12 +13,12 @@ describe('burger-ingredient reducer', () => {
     expect(feedReducer({
       ...initialState, feed: FeedObject
     }, clearFeedAction())).toEqual(
-      initialState
+      {...initialState}
     )
   })
 
   it('check result action select feed', () => {
-    expect(feedReducer(initialState, selectFeedAction(FeedObject))).toEqual(
+    expect(feedReducer({...initialState}, selectFeedAction(FeedObject))).toEqual(
       {
         ...initialState,
         feed: FeedObject

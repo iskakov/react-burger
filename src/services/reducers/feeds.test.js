@@ -1,20 +1,11 @@
-import { FeedObject } from '../../utils/constants-test';
+import { FeedObject} from '../../utils/constants-test';
 import { feedsOnCloseAction, feedsOnErrorAction, feedsOnMessageAction, feedsOnOpenAction } from '../actions/feeds';
-import { feedsReducer } from './feeds';
-
-const initialState = {
-  feeds: [],
-  total: 0,
-  totalToday: 0,
-  isOpen: false,
-  error: false,
-  errorMessage: ''
-};
+import { feedsReducer, initialState } from './feeds';
 
 describe('feeds reducer', () => {
   it('should return the initial state', () => {
     expect(feedsReducer(undefined, {})).toEqual(
-      initialState
+      {...initialState}
     )
   })
 
@@ -47,7 +38,7 @@ describe('feeds reducer', () => {
   })
 
   it('check result action ingredient load', () => {
-    expect(feedsReducer(initialState, feedsOnMessageAction({orders: [FeedObject], total: 200, totalToday: 5000}))).toEqual(
+    expect(feedsReducer({...initialState}, feedsOnMessageAction({orders: [FeedObject], total: 200, totalToday: 5000}))).toEqual(
       {
         ...initialState,
         feeds: [FeedObject],

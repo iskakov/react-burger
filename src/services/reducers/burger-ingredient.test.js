@@ -1,18 +1,11 @@
 import { BurgerObject } from '../../utils/constants-test';
 import { clearIngredientAction, ingredientErrorAction, ingredientLoadAction, ingredientPreloadAction, selectIngredientAction } from '../actions/burger-ingredient';
-import { burgerIngredientReducer } from './burger-ingredient';
-
-const initialState = {
-  ingredient: null,
-  load: false,
-  error: false,
-  errorMessage: ''
-};
+import { burgerIngredientReducer, initialState } from './burger-ingredient';
 
 describe('burger-ingredient reducer', () => {
   it('should return the initial state', () => {
     expect(burgerIngredientReducer(undefined, {})).toEqual(
-      initialState
+      {...initialState}
     )
   })
 
@@ -36,7 +29,7 @@ describe('burger-ingredient reducer', () => {
   })
 
   it('check result action ingredient load', () => {
-    expect(burgerIngredientReducer(initialState, ingredientLoadAction(BurgerObject))).toEqual(
+    expect(burgerIngredientReducer({...initialState}, ingredientLoadAction(BurgerObject))).toEqual(
       {
         ...initialState,
         ingredient: BurgerObject
@@ -53,7 +46,7 @@ describe('burger-ingredient reducer', () => {
   })
 
   it('check result action select ingredient', () => {
-    expect(burgerIngredientReducer(initialState, selectIngredientAction(BurgerObject))).toEqual(
+    expect(burgerIngredientReducer({...initialState}, selectIngredientAction(BurgerObject))).toEqual(
       {
         ...initialState,
         ingredient: BurgerObject
