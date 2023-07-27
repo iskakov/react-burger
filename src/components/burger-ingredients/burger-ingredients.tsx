@@ -12,8 +12,10 @@ const BurgerIngredients: FC = () => {
   const dispatch = useAppDispatch();
   const {ingredients, ingredientsPreload, ingredientsError, errorMessage} = useAppSelector(getBurgerIngredients)
   React.useEffect(() => {
-    dispatch(getIngredients())
-  }, [dispatch]);
+    if (ingredients.length === 0) {
+      dispatch(getIngredients())
+    }
+  }, [ingredients,dispatch]);
 
   const onChangeTab = (currTab: TYPE_OF_CATEGORY): void => {
     document.getElementById(currTab)?.scrollIntoView();
@@ -32,7 +34,7 @@ const BurgerIngredients: FC = () => {
     return accum;
   }, {});
   return (
-    <section className='mr-5 ml-5'>
+    <section className='mr-5 ml-5' data-cy='ingredients'>
       {ingredientsPreload ? (
         <div className={`${styles.main} ${styles.loading} text text_type_main-large`}> Идет загрузкка данных...</div>
       ) : ingredientsError ? (

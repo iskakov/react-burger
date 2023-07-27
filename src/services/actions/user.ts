@@ -1,7 +1,7 @@
 import { checkMailAPI, getUserAPI, loginAPI, refreshTokenAPI, registerAPI, resetPasswordAPI, updateUserAPI } from "../../utils/api"
 import { IUser, TAction } from "../../utils/constants";
 import { getCookie, setCookie } from "../../utils/cookie"
-import { CLEAR_RESET, LOGIN_ERROR, LOGIN_LOAD, LOGIN_PRELOAD, LOGOUT_LOAD, MAIL_ERROR, MAIL_LOAD, MAIL_PRELOAD, REGISTER_ERROR, REGISTER_LOAD, REGISTER_PRELOAD, RESET_PASSWORD_ERROR, RESET_PASSWORD_LOAD, RESET_PASSWORD_PRELOAD, USER_ERROR, USER_LOAD, USER_PRELOAD, USER_UPDATE } from "../constants/user";
+import { LOGIN_ERROR, LOGIN_LOAD, LOGIN_PRELOAD, LOGOUT_LOAD, MAIL_ERROR, MAIL_LOAD, MAIL_PRELOAD, REGISTER_ERROR, REGISTER_LOAD, REGISTER_PRELOAD, RESET_PASSWORD_ERROR, RESET_PASSWORD_LOAD, RESET_PASSWORD_PRELOAD, USER_ERROR, USER_LOAD, USER_PRELOAD, USER_UPDATE } from "../constants/user";
 import { AppDispatch, AppThunkAction } from "../store";
 
 export type TUserLoadAction = TAction<typeof USER_LOAD, IUser>;
@@ -15,7 +15,6 @@ export type TRegisterLoadAction = TAction<typeof REGISTER_LOAD, IUser>;
 export type TRegisterPreloadAction = TAction<typeof REGISTER_PRELOAD>;
 export type TRegisterErrorAction = TAction<typeof REGISTER_ERROR, string>;
 export type TMailLoadAction = TAction<typeof MAIL_LOAD>;
-export type TClearResetAction = TAction<typeof CLEAR_RESET>;
 export type TLogoutLoadAction = TAction<typeof LOGOUT_LOAD>;
 export type TMailPreloadAction = TAction<typeof MAIL_PRELOAD>;
 export type TMailErrorAction = TAction<typeof MAIL_ERROR, string>;
@@ -25,7 +24,7 @@ export type TResetPasswordErrorAction = TAction<typeof RESET_PASSWORD_ERROR, str
 
 export type TUserActions = TUserLoadAction | TUserUpdateAction | TUserPreloadAction | TUserErrorAction | TLoginLoadAction | TLoginPreloadAction | TLoginErrorAction
 | TRegisterLoadAction | TRegisterPreloadAction | TRegisterErrorAction | TMailLoadAction | TMailPreloadAction | TMailErrorAction | TResetPasswordLoadAction
-| TResetPasswordPreloadAction | TResetPasswordErrorAction | TLogoutLoadAction | TClearResetAction;
+| TResetPasswordPreloadAction | TResetPasswordErrorAction | TLogoutLoadAction;
 
 export const userLoadAction = (user: IUser): TUserLoadAction => ({type: USER_LOAD, payload: user});
 export const userUpdateAction = (user: IUser): TUserUpdateAction => ({type: USER_UPDATE, payload: user});
@@ -38,7 +37,6 @@ export const registerLoadAction = (user: IUser): TRegisterLoadAction => ({type: 
 export const registerPreloadAction = (): TRegisterPreloadAction => ({type: REGISTER_PRELOAD});
 export const registerErrorAction = (message: string): TRegisterErrorAction => ({type: REGISTER_ERROR, payload: message});
 export const mailLoadAction = (): TMailLoadAction => ({type: MAIL_LOAD});
-export const clearResetAction = (): TClearResetAction => ({type: CLEAR_RESET});
 export const logoutLoadAction = (): TLogoutLoadAction => ({type: LOGOUT_LOAD});
 export const mailPreloadAction = (): TMailPreloadAction => ({type: MAIL_PRELOAD});
 export const mailErrorAction = (message: string): TMailErrorAction => ({type: MAIL_ERROR, payload: message});

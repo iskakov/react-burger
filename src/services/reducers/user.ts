@@ -1,6 +1,6 @@
 import { IUser } from "../../utils/constants";
 import { TUserActions } from "../actions/user";
-import { CLEAR_RESET, LOGIN_ERROR, LOGIN_LOAD, LOGIN_PRELOAD, LOGOUT_LOAD, MAIL_ERROR, MAIL_LOAD, MAIL_PRELOAD, REGISTER_ERROR, REGISTER_LOAD, REGISTER_PRELOAD, RESET_PASSWORD_ERROR, RESET_PASSWORD_LOAD, RESET_PASSWORD_PRELOAD, USER_ERROR, USER_LOAD, USER_PRELOAD, USER_UPDATE } from "../constants/user";
+import { LOGIN_ERROR, LOGIN_LOAD, LOGIN_PRELOAD, LOGOUT_LOAD, MAIL_ERROR, MAIL_LOAD, MAIL_PRELOAD, REGISTER_ERROR, REGISTER_LOAD, REGISTER_PRELOAD, RESET_PASSWORD_ERROR, RESET_PASSWORD_LOAD, RESET_PASSWORD_PRELOAD, USER_ERROR, USER_LOAD, USER_PRELOAD, USER_UPDATE } from "../constants/user";
 
 interface IUserType {
   user: IUser;
@@ -8,10 +8,8 @@ interface IUserType {
   password: boolean;
   preload: boolean;
   mailError: boolean;
-  passwordError: boolean;
   loginError: boolean;
   registerError: boolean;
-  refreshError: boolean;
   resetError: boolean;
   userError: boolean;
   errorMessage: string;
@@ -24,10 +22,8 @@ const initialState: IUserType = {
   password: false,
   preload: false,
   mailError: false,
-  passwordError: false,
   loginError: false,
   registerError: false,
-  refreshError: false,
   resetError: false,
   userError: false,
   errorMessage: ''
@@ -54,8 +50,6 @@ export const userReducer = (state: IUserType = initialState, action: TUserAction
       return {...state, preload: false, mailError: false, mail: true}
     case RESET_PASSWORD_LOAD: 
       return {...state, preload: false, resetError: false, password: true}
-    case CLEAR_RESET: 
-      return {...state, password: false, mail: false, resetStatus: false}
     case REGISTER_ERROR:
       return {...state, preload: false, registerError: true, errorMessage: action.payload}
     case USER_ERROR:

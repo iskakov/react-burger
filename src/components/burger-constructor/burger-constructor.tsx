@@ -47,33 +47,37 @@ const BurgerConstructor: FC = () => {
     setVisibleOrder(false);
   }
   return (
-    <form className={styles.main + ' mr-5 ml-5 mt-25'} onSubmit={submit}>
-      <section ref={dropTarget}className={styles.list}>
+    <form className={styles.main + ' mr-5 ml-5 mt-25'} onSubmit={submit} data-cy='constructor'>
+      <section ref={dropTarget} className={styles.list}>
         {bun && (
-          <ConstructorElement
+          <div data-cy='constructor-bun-1'>
+            <ConstructorElement
             extraClass='ml-8 mb-4'
             type='top'
             isLocked={true}
             text={bun.name + ' (верх)'}
             price={bun.price}
             thumbnail={bun.image} />
+          </div>
         )}
         {ingredients.map(item => (
             itemConstructor(item)
         ))}
         {bun && (
-          <ConstructorElement
-          extraClass='ml-8 mb-4'
+          <div data-cy='constructor-bun-2'>
+            <ConstructorElement
+            extraClass='ml-8 mb-4'
             type='bottom'
             isLocked={true}
             text={bun.name + ' (низ)'}
             price={bun.price}
             thumbnail={bun.image} />
+          </div>
         )}
       </section>
-      <section className={styles.submit + ' mt-10'}>
+      <section className={styles.submit + ' mt-10'} data-cy='constructor-bottom'>
         <PriceIcon type='medium' price={totalPrice}/>
-        <Button extraClass='ml-10' disabled={bun === null} htmlType="submit" type="primary" size="large">
+        <Button extraClass='ml-10' disabled={bun === null} htmlType="submit" type="primary" size="large" data-cy='get-order'>
           {orderPreload ? 'Отправляю заказ' : 'Оформить заказ'}
         </Button>
       </section>

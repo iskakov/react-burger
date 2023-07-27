@@ -6,7 +6,7 @@ const App: FC = () => {
 
   return (
     <main>
-      <BrowserRouter>
+      <BrowserRouter basename='/react-burger'>
         <Routes/>
       </BrowserRouter>
     </main>
