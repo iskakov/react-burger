@@ -19,7 +19,6 @@ import FeedsPage from '../../pages/feeds-page';
 import OrdersPage from '../../pages/orders-page';
 import OrderPage from '../../pages/order-page';
 import ModalFeed from '../modal-feed/modal-feed';
-import ModalOrder from '../modal-order/modal-order';
 
 const ListRoutes: FC = () => {
   const {state} = useLocation()

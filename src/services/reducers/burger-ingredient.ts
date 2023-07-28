@@ -7,7 +7,7 @@ interface IBurgerIngredientType {
   error: boolean;
   errorMessage: string;
 }
-const initialState: IBurgerIngredientType = {
+export const initialState: IBurgerIngredientType = {
   ingredient: null,
   load: false,
   error: false,

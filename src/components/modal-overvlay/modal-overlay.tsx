@@ -20,7 +20,7 @@ const ModalOverlay: FC<IModalOverlay> = ({onClose, children}) => {
     }
   }
   return (
-    <section id='mainOverlay' tabIndex={0} onKeyDown={onKeyPress} className={styles.main} onClick={onClose}>
+    <section id='mainOverlay' tabIndex={0} onKeyDown={onKeyPress} className={styles.main} onClick={onClose} data-cy='modal-overlay'>
       {children}
     </section>
   );

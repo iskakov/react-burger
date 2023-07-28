@@ -5,7 +5,7 @@ interface IBurgerConstructorType {
   bun: IBurgerTypeConstructor | null;
   ingredients: Array<IBurgerTypeConstructor>;
 }
-const initialState: IBurgerConstructorType = {
+export const initialState: IBurgerConstructorType = {
   bun: null,
   ingredients: []
 }

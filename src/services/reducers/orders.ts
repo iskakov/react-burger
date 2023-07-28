@@ -11,7 +11,7 @@ interface IFeedStateType {
   error: boolean;
   errorMessage: string;
 }
-const initialState: IFeedStateType = {
+export const initialState: IFeedStateType = {
   orders: [],
   total: 0,
   totalToday: 0,

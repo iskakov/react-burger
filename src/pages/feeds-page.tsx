@@ -3,7 +3,6 @@ import styles from './feeds-page.module.css'
 import Feeds from '../components/feeds/feeds';
 import { useAppDispatch, useAppSelector } from '../utils/hooks';
 import { getBurgerIngredients, getFeeds } from '../services/store';
-import { getIngredients } from '../services/actions/burger-ingredients';
 import { feedsOnCloseAction, feedsOnInitAction } from '../services/actions/feeds';
 import FeedsInformation from '../components/feeds-information/feeds-information';
 import { Outlet } from 'react-router-dom';
@@ -14,9 +13,6 @@ const FeedsPage: FC = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if(ingredients.length === 0) {
-      dispatch(getIngredients())
-    }
     dispatch(feedsOnInitAction());
     return () => {
       dispatch(feedsOnCloseAction());

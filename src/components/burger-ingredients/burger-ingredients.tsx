@@ -3,17 +3,12 @@ import styles from './burger-ingredients.module.css'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import ListIngredient from '../list-ingredient/list-ingredient'
 import { TCategroies, TYPE_OF_CATEGORY } from '../../utils/constants';
-import { getIngredients } from '../../services/actions/burger-ingredients';
 import { getBurgerIngredients } from '../../services/store';
-import { useAppDispatch, useAppSelector } from '../../utils/hooks';
+import { useAppSelector } from '../../utils/hooks';
 
 const BurgerIngredients: FC = () => {
   const [currentTab, setCurrentTab] = React.useState<TYPE_OF_CATEGORY>(TYPE_OF_CATEGORY.bun)
-  const dispatch = useAppDispatch();
   const {ingredients, ingredientsPreload, ingredientsError, errorMessage} = useAppSelector(getBurgerIngredients)
-  React.useEffect(() => {
-    dispatch(getIngredients())
-  }, [dispatch]);
 
   const onChangeTab = (currTab: TYPE_OF_CATEGORY): void => {
     document.getElementById(currTab)?.scrollIntoView();
@@ -32,7 +27,7 @@ const BurgerIngredients: FC = () => {
     return accum;
   }, {});
   return (
-    <section className='mr-5 ml-5'>
+    <section className='mr-5 ml-5' data-cy='ingredients'>
       {ingredientsPreload ? (
         <div className={`${styles.main} ${styles.loading} text text_type_main-large`}> Идет загрузкка данных...</div>
       ) : ingredientsError ? (

@@ -1,7 +1,6 @@
 import React, { FC, useEffect } from 'react'
 import styles from './feed-page.module.css'
 import FeedDetail from '../components/feed-detail/feed-detail';
-import { getIngredients } from '../services/actions/burger-ingredients';
 import { feedsOnCloseAction, feedsOnInitAction } from '../services/actions/feeds';
 import { useAppDispatch, useAppSelector } from '../utils/hooks';
 import { getBurgerIngredients, getFeeds } from '../services/store';
@@ -23,9 +22,6 @@ const FeedPage: FC = () => {
   }, [feeds])
   
   useEffect(() => {
-    if(ingredients.length === 0) {
-      dispatch(getIngredients())
-    }
     dispatch(feedsOnInitAction());
     return () => {
       dispatch(feedsOnCloseAction());

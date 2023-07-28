@@ -8,7 +8,7 @@ interface IBurgerIngredientsType {
   ingredientsError: boolean;
   errorMessage: string;
 }
-const initialState: IBurgerIngredientsType = {
+export const initialState: IBurgerIngredientsType = {
   ingredients: [],
   ingredientsPreload: false,
   ingredientsError: false,

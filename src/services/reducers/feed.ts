@@ -5,7 +5,7 @@ import { CLEAR_FEED, SELECT_FEED } from "../constants/feed";
 interface IFeedStateType {
   feed: IFeedApi;
 }
-const initialState: IFeedStateType = {
+export const initialState: IFeedStateType = {
   feed: null
 }
 

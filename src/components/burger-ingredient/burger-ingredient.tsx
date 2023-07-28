@@ -28,7 +28,7 @@ const BurgerIngredient: FC<IBurgerIngredientsType> = ({ingredient}) => {
       ref={dragRef}
       onClick={showIngredientInfo}>
         {ingredient.count > 0 && (
-          <section className={styles.counter}>
+          <section className={styles.counter} data-cy={`counter-${ingredient._id}`}>
             <span className='text text_type_digits-default'>{ingredient.count}</span>
           </section>
         )}
